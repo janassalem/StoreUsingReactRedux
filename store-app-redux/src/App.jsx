@@ -1,6 +1,7 @@
 import './App.css'
 import LandingPage from "./LandingPage.jsx";
 import ProductDetailPage from "./ProductDetailPage.jsx";
+import Cart from "./Cart.jsx";
 
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
   return (
       <div>
         <LandingPage/>
-          <ProductDetailPage/>
+          {/*<ProductDetailPage/>*/}
+          {/*<Cart/>*/}
       </div>
 
   )
