@@ -1,14 +1,12 @@
-// src/components/ProductSection.jsx
 import React from 'react';
-import ProductCard from './ProductCard';
-import { Link } from "react-router-dom";
+import ProductCard from './ProductCard.jsx';
+import {Link} from "react-router-dom";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllProducts } from './features/Product/productSlice.js';
 
-const ProductSection = () => {
+const AllProductsPage = () => {
     const dispatch = useDispatch();
-    // Correcting the state selector. The slice name is 'products' not 'ProductState'
     const { products, isLoading, error } = useSelector((state) => state.ProductState);
 
     useEffect(() => {
@@ -39,26 +37,23 @@ const ProductSection = () => {
         );
     }
 
-    // Slice the products array to get only the first 4 items for "New Arrivals"
-    const featuredProducts = products.slice(0, 4);
 
     return (
-        <div className="bg-white py-1 px-10 mt-8">
+        <div className="bg-white py-1 px-10 mt-24">
             <div className="container mx-auto px-4">
                 <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
-                    NEW ARRIVALS
+                   ALL PRODUCTS
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {/* Map over the sliced array to display only 4 products */}
-                    {featuredProducts.map(product => (
+                    {products.map(product => (
                         <Link to={`/ProductDetailPage/${product.id}`} key={product.id}>
                             <ProductCard
                                 key={product.id}
                                 name={product.title}
                                 image={product.image}
                                 price={product.price}
-                                // The API response doesn't contain these props
                                 // rating={product.rating}
+                                // The API response doesn't contain these props, so they are omitted
                                 // reviews={product.reviews}
                                 // originalPrice={product.originalPrice}
                                 // discount={product.discount}
@@ -66,16 +61,18 @@ const ProductSection = () => {
                         </Link>
                     ))}
                 </div>
-                <div className="flex justify-center mt-12">
-                    {/* Changed the button to a Link for navigation */}
-                    <Link to="/all-products" className="px-8 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition duration-300">
-                        View All
-                    </Link>
-                </div>
+                {/*<div className="flex justify-center mt-12">*/}
+                {/*    <Link to="/all-products" className="px-8 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition duration-300">*/}
+                {/*        View All*/}
+                {/*    </Link>*/}
+
+
             </div>
             <hr className="my-10 border-gray-300" />
+
         </div>
+
     );
 };
 
-export default ProductSection;
+export default AllProductsPage;

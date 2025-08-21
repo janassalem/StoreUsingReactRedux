@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { PiStarFourFill } from "react-icons/pi";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
-import stripedShirtImage from './assets/striped-shirt.png';
+import stripedShirtImage from './assets/striped-shirt.jpeg';
 import ProductSection from "./ProductSection.jsx";
+import {Link, useParams} from "react-router-dom";
 
 const ProductDetailPage = () => {
+    const {id} = useParams()
+    console.log(id)
+
+
+    useEffect(()=>{
+
+    },[id])
+
     const product = {
         name: "ONE LIFE GRAPHIC T-SHIRT",
         rating: 4.5,
@@ -141,11 +150,14 @@ const ProductDetailPage = () => {
                             </div>
 
                             {/* Add to Cart Button */}
+                            <Link to="/Cart" className="w-full" >
                             <button
                                 className="w-full md:flex-1 px-6 py-4 bg-gray-900 text-white rounded-full font-bold transition-colors duration-300 hover:bg-gray-700"
                             >
                                 Add to Cart
+
                             </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

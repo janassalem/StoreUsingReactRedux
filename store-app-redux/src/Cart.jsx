@@ -3,13 +3,13 @@ import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import jeansImage from './assets/jeans.png';
 import checkeredShirtImage from './assets/checkered-shirt.png';
-import stripedShirtImage from './assets/striped-shirt.png';
+import stripedShirtImage from './assets/striped-shirt.jpeg';
 import { FaTrash } from "react-icons/fa6";
 
 
 
 const ShoppingCart = () => {
-    // Sample cart data
+
     const [cartItems, setCartItems] = useState([
         {
             id: 1,
@@ -70,7 +70,7 @@ const ShoppingCart = () => {
 
     return (
         <div>
-            <Navbar/>
+
             <div className="bg-white-100 font-[Inter] min-h-screen p-4 md:p-8">
                 <div className="container mx-auto max-w-7xl">
                     {/* Breadcrumb Navigation */}
@@ -155,7 +155,7 @@ const ShoppingCart = () => {
                     </div>
                 </div>
             </div>
-            <Footer/>
+
         </div>
 
     );

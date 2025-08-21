@@ -3,7 +3,8 @@ import ProductCard from './ProductCard'; // Assuming a ProductCard component exi
 import tshirtImage from './assets/t-shirt.png';
 import jeansImage from './assets/jeans.png';
 import checkeredShirtImage from './assets/checkered-shirt.png';
-import stripedShirtImage from './assets/striped-shirt.png';
+import stripedShirtImage from './assets/striped-shirt.jpeg';
+import {Link} from "react-router-dom";
 
 const NewArrivals = () => {
     const products = [
@@ -57,16 +58,18 @@ const NewArrivals = () => {
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {products.map(product => (
-                        <ProductCard
-                            key={product.id}
-                            name={product.name}
-                            image={product.image}
-                            rating={product.rating}
-                            reviews={product.reviews}
-                            price={product.price}
-                            originalPrice={product.originalPrice}
-                            discount={product.discount}
-                        />
+                      <Link to={`/ProductDetailPage`}>
+                          <ProductCard
+                              key={product.id}
+                              name={product.name}
+                              image={product.image}
+                              rating={product.rating}
+                              reviews={product.reviews}
+                              price={product.price}
+                              originalPrice={product.originalPrice}
+                              discount={product.discount}
+                          />
+                      </Link>
                     ))}
                 </div>
                 <div className="flex justify-center mt-12">

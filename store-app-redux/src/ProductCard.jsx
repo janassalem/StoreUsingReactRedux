@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const ProductCard = ({ name, image, rating, reviews, price, originalPrice, discount,product, onProductClick }) => {
+const ProductCard = ({ name, image, rating, reviews, price, originalPrice, discount }) => {
 
     const renderStars = (rating) => {
         const fullStars = Math.floor(rating);
@@ -21,12 +21,12 @@ const ProductCard = ({ name, image, rating, reviews, price, originalPrice, disco
 
     return (
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            onClick={() => onProductClick(product)}
+
             <div className="bg-gray-100 p-4">
                 <img src={image} alt={name} className="w-full h-64 object-contain mx-auto" />
             </div>
             <div className="p-4 text-center">
-                <h3 className="font-semibold text-lg">{name}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2 text-center line-clamp-2">{name}</h3>
                 <div className="flex items-center justify-center my-2">
                     <div className="flex text-sm">
                         {renderStars(rating)}
