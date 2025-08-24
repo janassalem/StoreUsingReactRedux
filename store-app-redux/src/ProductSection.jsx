@@ -46,6 +46,8 @@ const ProductSection = () => {
         );
     }
 
+
+    console.log(featuredProducts);
     const featuredProducts = filteredProducts.slice(0, 4);
 
 
@@ -65,6 +67,7 @@ const ProductSection = () => {
                                 name={product.title}
                                 image={product.image}
                                 price={product.price}
+                                rating={product.rating}
                                 // The API response doesn't contain these props
                                 // rating={product.rating}
                                 // reviews={product.reviews}
