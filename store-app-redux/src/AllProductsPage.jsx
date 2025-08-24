@@ -7,7 +7,7 @@ import { GetAllProducts } from './features/Product/productSlice.js';
 
 const AllProductsPage = () => {
     const dispatch = useDispatch();
-    const { products, isLoading, error } = useSelector((state) => state.ProductState);
+    const { filteredProducts,products, isLoading, error } = useSelector((state) => state.ProductState);
 
     useEffect(() => {
         dispatch(GetAllProducts());
@@ -36,13 +36,20 @@ const AllProductsPage = () => {
             </div>
         );
     }
-
+    if (filteredProducts.length === 0) {
+        return (
+            <div className="flex justify-center items-center py-20 text-xl text-gray-500">
+                No products match your search.
+            </div>
+        );
+    }
 
     return (
         <div className="bg-white py-1 px-10 mt-24">
             <div className="container mx-auto px-4">
                 <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
-                   ALL PRODUCTS
+                    {filteredProducts.length < 20 ? "SEARCH RESULTS" : "ALL PRODUCTS"}
+
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {products.map(product => (

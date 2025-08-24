@@ -1,76 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from "./Navbar.jsx";
-import Footer from "./Footer.jsx";
-import jeansImage from './assets/jeans.png';
-import checkeredShirtImage from './assets/checkered-shirt.png';
-import stripedShirtImage from './assets/striped-shirt.jpeg';
+import React from 'react';
 import { FaTrash } from "react-icons/fa6";
-
+import { useDispatch, useSelector } from "react-redux";
+import { removeItemFromCart, updateQuantity } from "./features/Product/CartSlice.js";
 
 
 const ShoppingCart = () => {
 
-    const [cartItems, setCartItems] = useState([
-        {
-            id: 1,
-            name: 'Gradient Graphic T-shirt',
-            size: 'Large',
-            color: 'White',
-            price: 145,
-            quantity: 1,
-            image: checkeredShirtImage,
-        },
-        {
-            id: 2,
-            name: 'Checkered Shirt',
-            size: 'Medium',
-            color: 'Red',
-            price: 180,
-            quantity: 1,
-            image: stripedShirtImage,
+    const dispatch = useDispatch();
 
-        },
-        {
-            id: 3,
-            name: 'Skinny Fit Jeans',
-            size: 'Large',
-            color: 'Blue',
-            price: 240,
-            quantity: 1,
-            image: jeansImage,
-        },
-    ]);
+    // Use useSelector to access the state from the Redux store
+    const { cartItems, subtotal, discount, deliveryFee, total } = useSelector(
+        (state) => state.CartState
+    );
 
-    const [subtotal, setSubtotal] = useState(0);
-    const [discount, setDiscount] = useState(0);
-    const deliveryFee = 15;
-
-    // Calculate subtotal and discount
-    useEffect(() => {
-        const calculatedSubtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-        setSubtotal(calculatedSubtotal);
-        // Assuming a static discount for this example
-        setDiscount(calculatedSubtotal * 0.20);
-    }, [cartItems]);
-
+    // This function now dispatches the updateQuantity action
     const handleQuantityChange = (id, newQuantity) => {
-        if (newQuantity < 1) return;
-        setCartItems(prevItems =>
-            prevItems.map(item =>
-                item.id === id ? { ...item, quantity: newQuantity } : item
-            )
-        );
+        dispatch(updateQuantity({ id, newQuantity }));
     };
 
+    // This function now dispatches the removeItemFromCart action
     const handleRemoveItem = (id) => {
-        setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+        dispatch(removeItemFromCart(id));
     };
 
-    const total = subtotal - discount + deliveryFee;
+    // Conditional rendering to display a message if the cart is empty
+    if (cartItems.length === 0) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <p className="text-xl text-gray-500 font-semibold">Your cart is empty.</p>
+            </div>
+        );
+    }
 
     return (
         <div>
-
             <div className="bg-white-100 font-[Inter] min-h-screen p-4 md:p-8">
                 <div className="container mx-auto max-w-7xl">
                     {/* Breadcrumb Navigation */}
@@ -78,14 +41,14 @@ const ShoppingCart = () => {
                         <a href="#" className="hover:text-gray-900">Home</a> &gt; <span className="text-gray-900">Cart</span>
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl font-extrabold mb-8">YOUR CART</h1>
+                    <h1 className="text-4xl md:text-5xl font-extrabold mb-8 mt-9">YOUR CART</h1>
 
-                    <div className="flex flex-col lg:flex-row gap-8">
+                    <div className="flex flex-col lg:flex-row gap-8 ">
                         {/* Cart Items Section */}
                         <div className="flex-1 space-y-4">
                             {cartItems.map(item => (
-                                <div key={item.id} className="bg-white rounded-2xl shadow-md p-4 flex items-center space-x-4">
-                                    <img src={item.image} alt={item.name} className="w-24 h-24 object-cover rounded-lg" />
+                                <div key={item.id} className="bg-white rounded-2xl shadow-md p-4 flex items-center space-x-4 ">
+                                    <img src={item.image} alt={item.name} className="w-24 h-full object-cover rounded-lg p-5" />
                                     <div className="flex-1">
                                         <h2 className="text-lg font-bold">{item.name}</h2>
                                         <p className="text-sm text-gray-500">Size: {item.size}</p>
@@ -155,9 +118,7 @@ const ShoppingCart = () => {
                     </div>
                 </div>
             </div>
-
         </div>
-
     );
 };
 

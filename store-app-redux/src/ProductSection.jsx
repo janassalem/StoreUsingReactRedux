@@ -1,4 +1,3 @@
-// src/components/ProductSection.jsx
 import React from 'react';
 import ProductCard from './ProductCard';
 import { Link } from "react-router-dom";
@@ -8,8 +7,8 @@ import { GetAllProducts } from './features/Product/productSlice.js';
 
 const ProductSection = () => {
     const dispatch = useDispatch();
-    // Correcting the state selector. The slice name is 'products' not 'ProductState'
-    const { products, isLoading, error } = useSelector((state) => state.ProductState);
+
+    const { filteredProducts,products, isLoading, error } = useSelector((state) => state.ProductState);
 
     useEffect(() => {
         dispatch(GetAllProducts());
@@ -39,8 +38,17 @@ const ProductSection = () => {
         );
     }
 
-    // Slice the products array to get only the first 4 items for "New Arrivals"
-    const featuredProducts = products.slice(0, 4);
+    if (filteredProducts.length === 0) {
+        return (
+            <div className="flex justify-center items-center py-20 text-xl text-gray-500">
+                No products match your search.
+            </div>
+        );
+    }
+
+    const featuredProducts = filteredProducts.slice(0, 4);
+
+
 
     return (
         <div className="bg-white py-1 px-10 mt-8">
@@ -67,7 +75,7 @@ const ProductSection = () => {
                     ))}
                 </div>
                 <div className="flex justify-center mt-12">
-                    {/* Changed the button to a Link for navigation */}
+
                     <Link to="/all-products" className="px-8 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition duration-300">
                         View All
                     </Link>

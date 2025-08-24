@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { IoSearchSharp } from "react-icons/io5";
+import { searchProducts } from './features/Product/productSlice.js';
+
 const SearchBar = () => {
     const [query, setQuery] = useState('');
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
-        setQuery(e.target.value);
-        // Logic
+        const value = e.target.value;
+        setQuery(value);
+
+        // Dispatch the search action with the query value
+        dispatch(searchProducts(value));
     };
 
     return (
         <div className="flex items-center w-100 h-10  max-w-lg mx-auto bg-gray-100 rounded-full shadow-md overflow-hidden p-2">
-            {/* Search Icon */}
             <button className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 focus:outline-none">
                 <IoSearchSharp />
             </button>
-
-
-            {/* Input Field */}
             <input
                 type="text"
                 placeholder="Search for products..."

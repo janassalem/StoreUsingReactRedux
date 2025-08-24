@@ -1,90 +1,80 @@
 import React from 'react';
-import ProductCard from './ProductCard'; // Assuming a ProductCard component exists
-import tshirtImage from './assets/t-shirt.png';
-import jeansImage from './assets/jeans.png';
-import checkeredShirtImage from './assets/checkered-shirt.png';
-import stripedShirtImage from './assets/striped-shirt.jpeg';
-import {Link} from "react-router-dom";
+import ProductCard from './ProductCard';
+import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetAllProducts } from './features/Product/productSlice.js';
 
-const NewArrivals = () => {
-    const products = [
-        {
-            id: 1,
-            name: 'T-shirt with Tape Details',
-            image: tshirtImage,
-            rating: 4.5,
-            reviews: 5,
-            price: 120,
-            originalPrice: null,
-            discount: null,
-        },
-        {
-            id: 2,
-            name: 'Skinny Fit Jeans',
-            image: jeansImage,
-            rating: 3.5,
-            reviews: 5,
-            price: 240,
-            originalPrice: 260,
-            discount: 20,
-        },
-        {
-            id: 3,
-            name: 'Checkered Shirt',
-            image: checkeredShirtImage,
-            rating: 4.5,
-            reviews: 5,
-            price: 180,
-            originalPrice: null,
-            discount: null,
-        },
-        {
-            id: 4,
-            name: 'Sleeve Striped T-shirt',
-            image: stripedShirtImage,
-            rating: 4.5,
-            reviews: 5,
-            price: 130,
-            originalPrice: 160,
-            discount: 30,
-        },
-    ];
+const TopSelling = () => {
+    const dispatch = useDispatch();
+    // Correcting the state selector. The slice name is 'products' not 'ProductState'
+    const { products, isLoading, error } = useSelector((state) => state.ProductState);
+
+    useEffect(() => {
+        dispatch(GetAllProducts());
+    }, [dispatch]);
+
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center py-20 text-xl text-gray-700">
+                Loading new arrivals...
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="flex justify-center items-center py-20 text-xl text-red-600">
+                Error: {error}
+            </div>
+        );
+    }
+
+    if (products.length === 0) {
+        return (
+            <div className="flex justify-center items-center py-20 text-xl text-gray-500">
+                No new arrivals available.
+            </div>
+        );
+    }
+
+    // Slice the products array to get only the first 4 items for "New Arrivals"
+    const featuredProducts = products.slice(5, 9);
 
     return (
-        <div className="bg-white py-12">
-            <div className="container mx-auto px-4 px-10 mt-8">
+        <div className="bg-white py-1 px-10 mt-8">
+            <div className="container mx-auto px-4">
                 <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
-                    TOP SELLING
+                    NEW ARRIVALS
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {products.map(product => (
-                      <Link to={`/ProductDetailPage`}>
-                          <ProductCard
-                              key={product.id}
-                              name={product.name}
-                              image={product.image}
-                              rating={product.rating}
-                              reviews={product.reviews}
-                              price={product.price}
-                              originalPrice={product.originalPrice}
-                              discount={product.discount}
-                          />
-                      </Link>
+                    {/* Map over the sliced array to display only 4 products */}
+                    {featuredProducts.map(product => (
+                        <Link to={`/ProductDetailPage/${product.id}`} key={product.id}>
+                            <ProductCard
+                                key={product.id}
+                                name={product.title}
+                                image={product.image}
+                                price={product.price}
+                                // The API response doesn't contain these props
+                                // rating={product.rating}
+                                // reviews={product.reviews}
+                                // originalPrice={product.originalPrice}
+                                // discount={product.discount}
+                            />
+                        </Link>
                     ))}
                 </div>
                 <div className="flex justify-center mt-12">
-                    <button className="px-8 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition duration-300">
+                    {/* Changed the button to a Link for navigation */}
+                    <Link to="/all-products" className="px-8 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition duration-300">
                         View All
-                    </button>
+                    </Link>
                 </div>
-            </div>
-            <div className=" flex justify-center">
-
             </div>
             <hr className="my-10 border-gray-300" />
         </div>
-
     );
 };
 
-export default NewArrivals;
+export default TopSelling;
