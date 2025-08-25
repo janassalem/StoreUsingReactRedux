@@ -56,8 +56,8 @@ const TopSelling = () => {
                                 name={product.title}
                                 image={product.image}
                                 price={product.price}
+                                rating={product.rating}
                                 // The API response doesn't contain these props
-                                // rating={product.rating}
                                 // reviews={product.reviews}
                                 // originalPrice={product.originalPrice}
                                 // discount={product.discount}

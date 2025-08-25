@@ -50,7 +50,7 @@ const ShoppingCart = () => {
                                 <div key={item.id} className="bg-white rounded-2xl shadow-md p-4 flex items-center space-x-4 ">
                                     <img src={item.image} alt={item.name} className="w-24 h-full object-cover rounded-lg p-5" />
                                     <div className="flex-1">
-                                        <h2 className="text-lg font-bold">{item.name}</h2>
+                                        <h2 className="text-lg font-bold">{item.title}</h2>
                                         <p className="text-sm text-gray-500">Size: {item.size}</p>
                                         <p className="text-sm text-gray-500">Color: {item.color}</p>
                                         <p className="text-lg font-bold mt-2">${item.price}</p>

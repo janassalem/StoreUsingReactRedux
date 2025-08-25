@@ -47,7 +47,7 @@ const ProductSection = () => {
     }
 
 
-    console.log(featuredProducts);
+    // console.log(featuredProducts);
     const featuredProducts = filteredProducts.slice(0, 4);
 
 

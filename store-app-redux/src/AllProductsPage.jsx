@@ -59,6 +59,7 @@ const AllProductsPage = () => {
                                 name={product.title}
                                 image={product.image}
                                 price={product.price}
+                                rating={product.rating}
                                 // rating={product.rating}
                                 // The API response doesn't contain these props, so they are omitted
                                 // reviews={product.reviews}
