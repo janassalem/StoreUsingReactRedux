@@ -1,13 +1,13 @@
 import React from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-
+import { FaStarHalfAlt } from "react-icons/fa";
 
 const ProductCard = ({ name, image, rating, price, originalPrice, discount }) => {
 
     const renderStars = (ratingValue) => {
         const stars = [];
         const fullStars = Math.floor(ratingValue);
-        const hasHalfStar = ratingValue % 1 >= 0.5; // Check if half-star
+        const hasHalfStar = ratingValue % 1 != 0.5; // Check if half-star
 
         for (let i = 0; i < 5; i++) {
             if (i < fullStars) {
@@ -16,7 +16,7 @@ const ProductCard = ({ name, image, rating, price, originalPrice, discount }) =>
             } else if (i === fullStars && hasHalfStar) {
                 // Render a half-star if the decimal is 0.5 or greater
 
-                stars.push(<span key={i} className="text-yellow-400">½</span>);
+                stars.push(<FaStarHalfAlt  key={i} className="text-yellow-400"/>);
             } else {
                 // Render an empty star for the rest
                 stars.push(<AiOutlineStar key={i} className="text-gray-300" />);

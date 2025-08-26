@@ -69,9 +69,9 @@ const HeroSection = () => {
                                     Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.
                                 </p>
                                 <div className="mt-8">
-                                    <button className="bg-black text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-800 transition-colors duration-300">
+                                    <Link to="/all-products" className="bg-black text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-800 transition-colors duration-300">
                                         Shop Now
-                                    </button>
+                                    </Link>
                                 </div>
                                 {/* Stats Section - Mobile */}
                                 <div className="mt-12 w-full flex flex-col space-y-6 text-center">
