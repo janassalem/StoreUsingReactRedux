@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react'
 import ProductCard from './ProductCard';
 import { Link } from "react-router-dom";
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllProducts } from './features/Product/productSlice.js';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const TopSelling = () => {
     const dispatch = useDispatch();
@@ -12,6 +13,9 @@ const TopSelling = () => {
 
     useEffect(() => {
         dispatch(GetAllProducts());
+        AOS.init({
+            once: false,
+        });
     }, [dispatch]);
 
     if (isLoading) {
@@ -38,16 +42,23 @@ const TopSelling = () => {
         );
     }
 
+
+
+
+
     // Slice the products array to get only the first 4 items for "New Arrivals"
     const featuredProducts = products.slice(5, 9);
 
     return (
         <div className="bg-white py-1 px-10 mt-8">
-            <div className="container mx-auto px-4">
-                <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
-                    NEW ARRIVALS
+            <div className="container mx-auto px-4" data-aos="fade-up"
+                 data-aos-anchor-placement="bottom-bottom">
+                <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8"  data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom">
+                    TOP SELLING
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"  data-aos="fade-up"
+                     data-aos-anchor-placement="bottom-bottom">
                     {/* Map over the sliced array to display only 4 products */}
                     {featuredProducts.map(product => (
                         <Link to={`/ProductDetailPage/${product.id}`} key={product.id}>
@@ -65,7 +76,8 @@ const TopSelling = () => {
                         </Link>
                     ))}
                 </div>
-                <div className="flex justify-center mt-12">
+                <div className="flex justify-center mt-12"  data-aos="fade-up"
+                     data-aos-anchor-placement="bottom-bottom">
                     {/* Changed the button to a Link for navigation */}
                     <Link to="/all-products" className="px-8 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition duration-300">
                         View All

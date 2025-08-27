@@ -2,10 +2,11 @@ import './App.css';
 import LandingPage from "./LandingPage.jsx";
 import ProductDetailPage from "./ProductDetailPage.jsx";
 import Cart from "./Cart.jsx";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import AllProductsPage from "./AllProductsPage.jsx";
+
 
 function App() {
     return (

@@ -1,16 +1,29 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { PiStarFourFill } from "react-icons/pi";
 import HeroImage from './assets/8384779.png';
 import {Link} from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const HeroSection = () => {
+    useEffect(() => {
+        AOS.init({
+            // Optional: Configuration options
+            duration: 1000, // Animation duration in milliseconds
+            easing: 'ease-in-out', // Easing function
+            once: true, // Whether animation should only happen once
+            disable: 'phone', // Disable animations on phone devices
+        });
+    }, []);
     return (
         <div className="bg-white">
             <div className="relative container mx-auto overflow-hidden bg-white">
                 {/* Desktop Layout*/}
                 <div className="hidden md:flex flex-col lg:flex-row items-start justify-between md:p-16 space-y-8 lg:space-y-0 w-full">
                     {/* Left Side Content - Desktop */}
-                    <div className="relative p-3 z-10 w-1/2 flex flex-col justify-center text-center lg:text-left">
+                    <div className="relative p-3 z-10 w-1/2 flex flex-col justify-center text-center lg:text-left" data-aos="fade-right"
+                         data-aos-offset="300"
+                         data-aos-easing="ease-in-sine">
                         <h1 className="text-4xl md:text-6xl font-extrabold text-black mt-12">
                             FIND CLOTHES THAT MATCHES YOUR STYLE
                         </h1>
@@ -39,18 +52,22 @@ const HeroSection = () => {
                         </div>
                     </div>
                     {/* Right Side Image - Desktop */}
-                    <div className="relative w-1/2 lg:mt-0">
+                    <div className="relative w-1/2 lg:mt-0 " >
                         <div className="absolute top-10 right-10 transform -translate-x-1/2 -translate-y-1/2">
                             <PiStarFourFill />
                         </div>
                         <div className="absolute bottom-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2">
                             <PiStarFourFill />
                         </div>
-                        <div className="w-[450px] h-auto absolute -top-36 left-45">
+                        <div className="w-[450px] h-auto absolute -top-44 left-45">
                             <img
                                 src={HeroImage}
                                 alt="Models showcasing fashion"
                                 className="!w-full !h-full"
+                                data-aos="fade-left"
+                                data-aos-anchor="#example-anchor"
+                                data-aos-offset="500"
+                                data-aos-duration="500"
                             />
                         </div>
                     </div>
