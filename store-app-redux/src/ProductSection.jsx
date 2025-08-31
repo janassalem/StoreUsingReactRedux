@@ -68,7 +68,7 @@ const ProductSection = () => {
                      data-aos-anchor-placement="bottom-bottom">
                     {/* Map over the sliced array to display only 4 products */}
                     {featuredProducts.map(product => (
-                        <Link to={`/ProductDetailPage/${product.id}`} key={product.id}>
+                        <Link to={`/ProductDetailPage/products/${product.id}`} key={product.id}>
                             <ProductCard
                                 key={product.id}
                                 name={product.title}

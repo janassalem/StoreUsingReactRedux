@@ -6,8 +6,9 @@ import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import AllProductsPage from "./AllProductsPage.jsx";
-
-
+import CheckOutPage from "./CheckOutPage.jsx";
+import NewArrivals from "./NewArrivals.jsx";
+import Profile from "./Profile.jsx";
 function App() {
     return (
         <Router>
@@ -17,7 +18,9 @@ function App() {
                 <Route path="/ProductDetailPage/:id" element={<ProductDetailPage />} />
                 <Route path="/Cart" element={<Cart />} />
                 <Route path="/all-products"  element={<AllProductsPage/> }/>
-                <Route path="/new-arrivals" element={<AllProductsPage/>}/>
+                <Route path="/new-arrivals" element={<NewArrivals/>}/>
+                <Route path="/checkout" element={<CheckOutPage/>}/>
+                <Route path="/profile" element={<Profile />}/>
             </Routes>
             <Footer />
         </Router>

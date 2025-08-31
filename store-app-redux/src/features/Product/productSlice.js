@@ -12,13 +12,14 @@ export const GetAllProducts = createAsyncThunk(
     'get/products',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await axios.get("https://fakestoreapi.com/products");
+            const response = await axios.get("http://localhost:3000/products");
             return response.data;
         } catch (e) {
             return rejectWithValue(e.message);
         }
     }
 );
+
 
 export const productListSlice = createSlice({
     name: 'Products',

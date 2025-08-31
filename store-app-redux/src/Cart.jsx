@@ -2,6 +2,7 @@ import React from 'react';
 import { FaTrash } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItemFromCart, updateQuantity } from "./features/Product/CartSlice.js";
+import {Link} from "react-router-dom";
 
 
 const ShoppingCart = () => {
@@ -111,9 +112,12 @@ const ShoppingCart = () => {
                                     Apply
                                 </button>
                             </div>
-                            <button className="w-full px-6 py-4 bg-gray-900 text-white rounded-full font-bold transition-colors duration-200 hover:bg-gray-700">
-                                Go to Checkout
-                            </button>
+                            <Link to="/checkout">
+                                <button className="w-full px-6 py-2 bg-gray-900 text-white rounded-full font-bold transition-colors duration-200 hover:bg-gray-700">
+                                    Go to Checkout
+                                </button>
+                            </Link>
+
                         </div>
                     </div>
                 </div>
