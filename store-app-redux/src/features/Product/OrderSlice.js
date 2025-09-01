@@ -4,6 +4,7 @@ import axios from 'axios';
 // Define the initial state for the orders
 const initialState = {
     orders: [],
+    spOrders: [],
     isLoading: false,
     error: null,
 };
@@ -19,6 +20,20 @@ export const placeOrder = createAsyncThunk(
         } catch (e) {
             // Return the error message to be handled by the rejected state
             return rejectWithValue(e.message);
+        }
+    }
+);
+
+
+export const GetSpOrders = createAsyncThunk(
+    'get/GetSpOrders',
+    async (id, { rejectWithValue }) => {
+        try {
+            const response = await axios.get(`http://localhost:3000/orders/${id}`);
+            return response.data;
+        } catch (e) {
+            return rejectWithValue(e.message);
+
         }
     }
 );
@@ -78,7 +93,12 @@ const orderSlice = createSlice({
             .addCase(placeOrder.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload; // action.payload contains the error message from rejectWithValue
-            });
+            })
+            .addCase(GetAllOrders.fulfilled,(state,action)=>{
+                state.orders = action.payload;
+            })
+
+
     },
 });
 

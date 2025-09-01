@@ -3,6 +3,8 @@ import { FaTrash } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItemFromCart, updateQuantity } from "./features/Product/CartSlice.js";
 import {Link} from "react-router-dom";
+import CartEmptyImage from "./assets/CartEmptyImage.png";
+import "aos/dist/aos.css";
 
 
 const ShoppingCart = () => {
@@ -27,8 +29,18 @@ const ShoppingCart = () => {
     // Conditional rendering to display a message if the cart is empty
     if (cartItems.length === 0) {
         return (
-            <div className="flex justify-center items-center h-screen">
-                <p className="text-xl text-gray-500 font-semibold">Your cart is empty.</p>
+
+            <div className="flex justify-center items-center min-h-screen font-[Inter] p-8">
+                <div>
+                    <img src={CartEmptyImage} className=" justify-start  h-200 w-150 top-10 right-0 absolute" />
+                </div>
+                <div className=" absolute text-center bg-white  p-10 max-w-lg left-50 top-65"  >
+                    <p className="text-3xl text-gray-500 font-semibold mb-4" >Your cart is empty.</p>
+                    <Link to="/all-products" className="inline-block px-6 py-3 bg-gray-900 text-white rounded-full font-bold transition-colors duration-200 hover:bg-gray-700"
+                         >
+                        Continue Shopping
+                    </Link>
+                </div>
             </div>
         );
     }
@@ -42,11 +54,13 @@ const ShoppingCart = () => {
                         <a href="#" className="hover:text-gray-900">Home</a> &gt; <span className="text-gray-900">Cart</span>
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl font-extrabold mb-8 mt-9">YOUR CART</h1>
+                    <h1 className="text-4xl md:text-5xl font-extrabold mb-8 mt-9"
+                        data-aos="fade-up-right">YOUR CART</h1>
 
                     <div className="flex flex-col lg:flex-row gap-8 ">
                         {/* Cart Items Section */}
-                        <div className="flex-1 space-y-4">
+                        <div className="flex-1 space-y-4"
+                             data-aos="fade-up-right">
                             {cartItems.map(item => (
                                 <div key={item.id} className="bg-white rounded-2xl shadow-md p-4 flex items-center space-x-4 ">
                                     <img src={item.image} alt={item.name} className="w-24 h-full object-cover rounded-lg p-5" />

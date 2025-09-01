@@ -9,7 +9,11 @@ import { clearCart } from "./features/Product/CartSlice.js";
 
 const CheckOutPage = () => {
     const dispatch = useDispatch();
+    const timestamp = Date.now();
+    const date = new Date(timestamp);
 
+    const options = { day: "2-digit", month: "long", year: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
     //use selector to get states from store
     const { cartItems, subtotal, discount, deliveryFee, total } = useSelector(
         (state) => state.CartState
@@ -28,7 +32,7 @@ const CheckOutPage = () => {
 
     const [orderPlaced, setOrderPlaced] = useState(false);
 
-    // ✅ Clear cart AFTER success screen is shown
+    // Clear cart AFTER success screen is shown
     useEffect(() => {
         if (orderPlaced) {
             const timer = setTimeout(() => {
@@ -51,6 +55,7 @@ const CheckOutPage = () => {
         const orderData = {
             name: formData.fullName,
             email: formData.email,
+            date:formattedDate,
             address: {
                 street: formData.street,
                 city: formData.city,
@@ -63,7 +68,8 @@ const CheckOutPage = () => {
             },
             items: cartItems.map(item => ({
                 id: item.id,
-                quantity: item.quantity
+                quantity: item.quantity,
+                image:item.image,
             })),
             total,
         };
@@ -73,7 +79,7 @@ const CheckOutPage = () => {
         // send to backend
         dispatch(placeOrder(orderData));
 
-        // ✅ First show success screen
+        //  First show success screen
         setOrderPlaced(true);
     };
 
@@ -82,7 +88,8 @@ const CheckOutPage = () => {
         return (
             <div className="flex items-center min-h-screen font-[Inter] p-8 relative">
                 <div>
-                    <img src={Sucessimage} className=" justify-start  h-150 w-150 top-26 left-0 absolute" />
+                    <img src={Sucessimage} className=" justify-start  h-150 w-150 top-26 left-0 absolute"
+                         data-aos="fade-up"/>
                 </div>
                 <div className=" absolute text-center bg-white  p-10 max-w-lg right-50 top-65 ">
                     <h2 className="text-5xl font-extrabold text-green-600 mb-4">Order Placed!</h2>

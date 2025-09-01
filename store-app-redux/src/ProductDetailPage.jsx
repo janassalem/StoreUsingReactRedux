@@ -15,8 +15,10 @@ const ProductDetailPage = () => {
     useEffect(() => {
             dispatch(GetAllProducts());
     }, [id]);
-    const product = products.find(p => p.id === parseInt(id));
-
+    console.log(id)
+    const product = products.find(p => p.id === id);
+    console.log(products)
+    console.log(product)
     const [mainImage, setMainImage] = useState(null);
     const [quantity, setQuantity] = useState(1);
     useEffect(() => {

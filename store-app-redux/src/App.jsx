@@ -9,6 +9,8 @@ import AllProductsPage from "./AllProductsPage.jsx";
 import CheckOutPage from "./CheckOutPage.jsx";
 import NewArrivals from "./NewArrivals.jsx";
 import Profile from "./Profile.jsx";
+import LoginPage from "./LoginPage.jsx";
+import  RegistrationPage from "./RegisterationPage.jsx";
 function App() {
     return (
         <Router>
@@ -21,6 +23,8 @@ function App() {
                 <Route path="/new-arrivals" element={<NewArrivals/>}/>
                 <Route path="/checkout" element={<CheckOutPage/>}/>
                 <Route path="/profile" element={<Profile />}/>
+                <Route  path="/log-in" element={<LoginPage />}/>
+                <Route path="/Registr" element={<RegistrationPage/>}/>
             </Routes>
             <Footer />
         </Router>
