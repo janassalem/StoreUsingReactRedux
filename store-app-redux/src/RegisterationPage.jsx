@@ -1,28 +1,78 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginImage from "./assets/LoginImage.png"
-import { FaGoogle } from "react-icons/fa";
-import { FaApple } from "react-icons/fa";
+import { FaGoogle, FaApple } from "react-icons/fa";
 import AOS from "aos";
+import axios from "axios";
+import {Link, useNavigate} from "react-router-dom";
 
 const RegisterationPage = () => {
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: "",
+        terms: false
+    });
+
+    const [message, setMessage] = useState("");
+
     useEffect(() => {
         AOS.init({
-            // Optional: Configuration options
-            duration: 1000, // Animation duration in milliseconds
-            easing: 'ease-in-out', // Easing function
-            once: true, // Whether animation should only happen once
-            disable: 'phone', // Disable animations on phone devices
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            disable: 'phone',
         });
     }, []);
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData({
+            ...formData,
+            [name]: type === "checkbox" ? checked : value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!formData.terms) {
+            setMessage("You must agree to the terms.");
+            return;
+        }
+
+        try {
+            // check if user already exists
+            const res = await axios.get(`http://localhost:3000/users?email=${formData.email}`);
+            if (res.data.length > 0) {
+                setMessage("User already exists with this email.");
+                return;
+            }
+
+            // create new user
+            await axios.post("http://localhost:3000/users", {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password
+            });
+
+            setMessage("Registration successful! You can now login.");
+            navigate("/profile")
+            setFormData({ name: "", email: "", password: "", terms: false });
+        } catch (error) {
+            console.error(error);
+            setMessage("Something went wrong. Try again.");
+        }
+    };
+
     return (
         <div className=" bg-white flex items-center justify-center w-full mt-20 ">
             <div className="bg-white rounded-3xl overflow-hidden flex flex-col lg:flex-row max-w-6xl w-full">
                 {/* Left side: Form */}
-                <div className="w-full lg:w-1/2 p-8 md:p-16 flex flex-col justify-center"  data-aos="flip-left">
+                <div className="w-full lg:w-1/2 p-8 md:p-16 flex flex-col justify-center" data-aos="flip-left">
                     <h1 className="text-3xl font-bold mb-8 text-neutral-800">Get Started Now</h1>
 
-
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
                             <div className="mt-1">
@@ -31,7 +81,8 @@ const RegisterationPage = () => {
                                     name="name"
                                     type="text"
                                     placeholder="Enter your name"
-                                    autoComplete="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
                                     required
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
                                 />
@@ -46,7 +97,8 @@ const RegisterationPage = () => {
                                     name="email"
                                     type="email"
                                     placeholder="Enter your email"
-                                    autoComplete="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
                                     required
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
                                 />
@@ -61,7 +113,8 @@ const RegisterationPage = () => {
                                     name="password"
                                     type="password"
                                     placeholder="Enter your password"
-                                    autoComplete="current-password"
+                                    value={formData.password}
+                                    onChange={handleChange}
                                     required
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
                                 />
@@ -74,6 +127,8 @@ const RegisterationPage = () => {
                                     id="terms"
                                     name="terms"
                                     type="checkbox"
+                                    checked={formData.terms}
+                                    onChange={handleChange}
                                     className="h-4 w-4 text-black focus:ring-white border-gray-300 rounded"
                                 />
                             </div>
@@ -87,12 +142,16 @@ const RegisterationPage = () => {
                         <div>
                             <button
                                 type="submit"
-                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:text-black bg-black hover:bg-white  focus:ring-2 focus:ring-offset-2 focus:ring-black focus:border-black"
+                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:text-black bg-black hover:bg-white focus:ring-2 focus:ring-offset-2 focus:ring-black focus:border-black"
                             >
                                 Sign up
                             </button>
                         </div>
                     </form>
+
+                    {message && (
+                        <p className="mt-4 text-center text-sm text-red-600">{message}</p>
+                    )}
 
                     <div className="mt-6 text-center text-gray-500 relative">
                         <div className="absolute inset-0 flex items-center">
@@ -120,14 +179,14 @@ const RegisterationPage = () => {
 
                     <div className="mt-6 text-center text-sm text-gray-600">
                         Have an account?
-                        <a href="#" className="font-medium text-black hover:text-white">
+                        <Link to="/log-in"  className="font-medium text-black hover:text-white">
                             Sign in
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
                 {/* Right side: Image */}
-                <div className="w-full lg:w-1/2 hidden lg:block  overflow-hidden" data-aos="zoom-in">
+                <div className="w-full lg:w-1/2 hidden lg:block overflow-hidden" data-aos="zoom-in">
                     <img
                         src={LoginImage}
                         alt="Login photo"

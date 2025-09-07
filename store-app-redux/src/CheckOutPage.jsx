@@ -47,12 +47,11 @@ const CheckOutPage = () => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
-
     // Handler for the "Place Order" button
     const handlePlaceOrder = (e) => {
         e.preventDefault();
-
         const orderData = {
+            userID:JSON.parse(localStorage.getItem("user"))[0].id,
             name: formData.fullName,
             email: formData.email,
             date:formattedDate,
@@ -91,8 +90,12 @@ const CheckOutPage = () => {
                     <img src={Sucessimage} className=" justify-start  h-150 w-150 top-26 left-0 absolute"
                          data-aos="fade-up"/>
                 </div>
-                <div className=" absolute text-center bg-white  p-10 max-w-lg right-50 top-65 ">
-                    <h2 className="text-5xl font-extrabold text-green-600 mb-4">Order Placed!</h2>
+                <div className=" absolute text-center bg-white  p-10 max-w-lg right-50 top-65 "
+                     data-aos="flip-left"
+                     data-aos-easing="ease-out-cubic"
+                     data-aos-duration="2000">
+                    <h2 className="text-5xl font-extrabold text-green-600 mb-4"
+                        >Order Placed!</h2>
                     <p className="text-gray-700 mb-6">
                         Thank you for your purchase. Your order has been successfully placed and will be shipped shortly.
                     </p>

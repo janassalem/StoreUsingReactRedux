@@ -243,48 +243,20 @@
   ],
   "orders": [
     {
-      "id": "ce8a",
-      "name": "Pearl Watson",
-      "email": "lebima@mailinator.com",
-      "date": "September 01, 2025",
+      "id": "5c26",
+      "userID": "d11f",
+      "name": "Tara Dillard",
+      "email": "hojog@mailinator.com",
+      "date": "September 07, 2025",
       "address": {
-        "street": "Consequat Minima pr",
-        "city": "Ut voluptas non quo ",
-        "zip": "72934"
+        "street": "Dolorum aut consequa",
+        "city": "Sit officia in reru",
+        "zip": "59203"
       },
       "payment": {
-        "card": "Sit consequatur sit ",
-        "expiration": "Velit deleniti in do",
-        "cvc": "Commodo qui voluptas"
-      },
-      "items": [
-        {
-          "id": "2",
-          "quantity": 2,
-          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png"
-        },
-        {
-          "id": "4",
-          "quantity": 3,
-          "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_t.png"
-        }
-      ],
-      "total": 94.056
-    },
-    {
-      "id": "a3fd",
-      "name": "Irma Mueller",
-      "email": "xuqak@mailinator.com",
-      "date": "September 01, 2025",
-      "address": {
-        "street": "In modi non ullamco ",
-        "city": "Voluptate dolor cons",
-        "zip": "21004"
-      },
-      "payment": {
-        "card": "Vel officia incidunt",
-        "expiration": "Quia eaque dolorem r",
-        "cvc": "Aperiam sunt tempor"
+        "card": "Odio id anim recusan",
+        "expiration": "Sunt et error eum cu",
+        "cvc": "Consequatur asperio"
       },
       "items": [
         {
@@ -293,7 +265,175 @@
           "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png"
         }
       ],
-      "total": 17.84
+      "total": 37.84
+    },
+    {
+      "id": "2b3f",
+      "userID": "d11f",
+      "name": "Brandon Mann",
+      "email": "bolad@mailinator.com",
+      "date": "September 07, 2025",
+      "address": {
+        "street": "Nihil aspernatur ape",
+        "city": "Sint excepturi in nu",
+        "zip": "25713"
+      },
+      "payment": {
+        "card": "Laboris blanditiis c",
+        "expiration": "Explicabo Reiciendi",
+        "cvc": "Non et explicabo At"
+      },
+      "items": [
+        {
+          "id": "1",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png"
+        }
+      ],
+      "total": 107.96000000000001
+    },
+    {
+      "id": "b86e",
+      "userID": "2e35",
+      "name": "Ann White",
+      "email": "nytezeda@mailinator.com",
+      "date": "September 07, 2025",
+      "address": {
+        "street": "Et corporis sint com",
+        "city": "Ratione voluptatibus",
+        "zip": "15516"
+      },
+      "payment": {
+        "card": "Accusamus dolorem ni",
+        "expiration": "Dignissimos nihil do",
+        "cvc": "Non et laboriosam q"
+      },
+      "items": [
+        {
+          "id": "1",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png"
+        }
+      ],
+      "total": 107.96000000000001
+    },
+    {
+      "id": "d507",
+      "userID": "2e35",
+      "name": "Christopher Gamble",
+      "email": "vefeguleb@mailinator.com",
+      "date": "September 07, 2025",
+      "address": {
+        "street": "Obcaecati illo adipi",
+        "city": "Nesciunt quas dicta",
+        "zip": "22633"
+      },
+      "payment": {
+        "card": "Dolorem blanditiis f",
+        "expiration": "Eiusmod autem quia n",
+        "cvc": "Recusandae Amet mi"
+      },
+      "items": [
+        {
+          "id": "4",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_t.png"
+        },
+        {
+          "id": "2",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png"
+        }
+      ],
+      "total": 50.632
+    },
+    {
+      "id": "8aed",
+      "userID": "d11f",
+      "name": "Price Perkins",
+      "email": "cymi@mailinator.com",
+      "date": "September 07, 2025",
+      "address": {
+        "street": "Velit mollitia anim",
+        "city": "Vel in dolorem ab su",
+        "zip": "59747"
+      },
+      "payment": {
+        "card": "Quibusdam et neque m",
+        "expiration": "Facilis inventore et",
+        "cvc": "Dicta fugit sit re"
+      },
+      "items": [
+        {
+          "id": "2",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png"
+        }
+      ],
+      "total": 37.84
+    },
+    {
+      "id": "f61d",
+      "userID": "d11f",
+      "name": "Hanna Frye",
+      "email": "cesys@mailinator.com",
+      "date": "September 07, 2025",
+      "address": {
+        "street": "Maxime voluptatem M",
+        "city": "Tempora ut iure prov",
+        "zip": "32562"
+      },
+      "payment": {
+        "card": "Rem sapiente at exce",
+        "expiration": "Quidem non id ut pra",
+        "cvc": "Eos sit voluptas t"
+      },
+      "items": [
+        {
+          "id": "3",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png"
+        }
+      ],
+      "total": 64.792
+    }
+  ],
+  "users": [
+    {
+      "id": "0",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin"
+    },
+    {
+      "id": "d11f",
+      "name": "ziad",
+      "email": "ziad@gmail.com",
+      "password": "102030"
+    },
+    {
+      "id": "6ced",
+      "name": "jana",
+      "email": "jana@gmail.com",
+      "password": "102030"
+    },
+    {
+      "id": "2e35",
+      "name": "ali",
+      "email": "ali@gmail.com",
+      "password": "102030"
+    },
+    {
+      "id": "bc24",
+      "name": "Linus Mcneil",
+      "email": "kozihuk@mailinator.com",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "3c5c",
+      "name": "Beatrice Reilly",
+      "email": "geneqaw@mailinator.com",
+      "password": "Pa$$w0rd!"
     }
   ]
 }

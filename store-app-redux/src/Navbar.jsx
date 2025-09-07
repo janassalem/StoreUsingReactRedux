@@ -5,6 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import SearchBar from "./SearchBar.jsx";
 import { useSelector } from 'react-redux';
+import "aos/dist/aos.css";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -18,7 +19,9 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md rounded-lg flex items-center justify-between p-4 md:px-10">
+        <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md rounded-lg flex items-center justify-between p-4 md:px-10"
+             data-aos="fade-down"
+             data-aos-anchor-placement="top-center">
             {/* Brand Logo and Home Link */}
             <div className="flex-shrink-0">
                 <Link to="/" className="flex items-center space-x-2" onClick={handleLinkClick}>
@@ -54,6 +57,8 @@ const Navbar = () => {
                 <Link to="/profile" className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 focus:outline-none">
                     <IoPersonSharp size={24} />
                 </Link>
+
+
             </div>
 
             {/* Hamburger Menu Button  */}

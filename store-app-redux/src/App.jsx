@@ -11,6 +11,7 @@ import NewArrivals from "./NewArrivals.jsx";
 import Profile from "./Profile.jsx";
 import LoginPage from "./LoginPage.jsx";
 import  RegistrationPage from "./RegisterationPage.jsx";
+import Dashboard from "./Dashboard.jsx";
 function App() {
     return (
         <Router>
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/profile" element={<Profile />}/>
                 <Route  path="/log-in" element={<LoginPage />}/>
                 <Route path="/Registr" element={<RegistrationPage/>}/>
+                <Route path="/dashboard" element={<Dashboard/>}/>
             </Routes>
             <Footer />
         </Router>

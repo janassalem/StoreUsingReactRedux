@@ -32,9 +32,11 @@ const ShoppingCart = () => {
 
             <div className="flex justify-center items-center min-h-screen font-[Inter] p-8">
                 <div>
-                    <img src={CartEmptyImage} className=" justify-start  h-200 w-150 top-10 right-0 absolute" />
+                    <img src={CartEmptyImage} className=" justify-start  h-200 w-150 top-10 right-0 absolute"
+                         data-aos="fade-left"/>
                 </div>
-                <div className=" absolute text-center bg-white  p-10 max-w-lg left-50 top-65"  >
+                <div className=" absolute text-center bg-white  p-10 max-w-lg left-50 top-65"
+                     data-aos="fade-right">
                     <p className="text-3xl text-gray-500 font-semibold mb-4" >Your cart is empty.</p>
                     <Link to="/all-products" className="inline-block px-6 py-3 bg-gray-900 text-white rounded-full font-bold transition-colors duration-200 hover:bg-gray-700"
                          >
@@ -95,7 +97,8 @@ const ShoppingCart = () => {
                         </div>
 
                         {/* Order Summary Section */}
-                        <div className="lg:w-1/3 bg-white rounded-2xl shadow-md p-6 h-fit">
+                        <div className="lg:w-1/3 bg-white rounded-2xl shadow-md p-6 h-fit"
+                             data-aos="zoom-in">
                             <h2 className="text-2xl font-extrabold mb-6">Order Summary</h2>
                             <div className="space-y-4">
                                 <div className="flex justify-between">
