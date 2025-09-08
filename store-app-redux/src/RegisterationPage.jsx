@@ -4,6 +4,7 @@ import { FaGoogle, FaApple } from "react-icons/fa";
 import AOS from "aos";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 const RegisterationPage = () => {
     const navigate = useNavigate();
@@ -35,7 +36,7 @@ const RegisterationPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        toast("Registeration Sucessfull!");
         if (!formData.terms) {
             setMessage("You must agree to the terms.");
             return;

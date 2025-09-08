@@ -6,6 +6,8 @@ import { FaGoogle, FaApple } from "react-icons/fa";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {Link, useNavigate} from "react-router-dom";
+import registerationPage from "./RegisterationPage.jsx";
+import {toast, ToastContainer} from "react-toastify";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -21,6 +23,7 @@ const LoginPage = () => {
     };
 
     const handleSubmit = (e) => {
+        toast("Login Sucessfull!");
         e.preventDefault();
         console.log(1)
         if (formData.email === "admin" && formData.password === "admin") {
@@ -33,7 +36,7 @@ const LoginPage = () => {
             nav("../")
         }
         else{
-            dispatch(loginUser(formData));
+            dispatch(registerationPage())
         }
 
     };

@@ -5,7 +5,7 @@ import { removeItemFromCart, updateQuantity } from "./features/Product/CartSlice
 import {Link} from "react-router-dom";
 import CartEmptyImage from "./assets/CartEmptyImage.png";
 import "aos/dist/aos.css";
-
+import {toast, ToastContainer} from "react-toastify";
 
 const ShoppingCart = () => {
 
@@ -19,11 +19,13 @@ const ShoppingCart = () => {
     // This function now dispatches the updateQuantity action
     const handleQuantityChange = (id, newQuantity) => {
         dispatch(updateQuantity({ id, newQuantity }));
+        toast("changed Sucessfully !");
     };
 
     // This function now dispatches the removeItemFromCart action
     const handleRemoveItem = (id) => {
         dispatch(removeItemFromCart(id));
+        toast("removed Sucessfully !");
     };
 
     // Conditional rendering to display a message if the cart is empty

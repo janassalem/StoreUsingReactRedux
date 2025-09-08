@@ -55,8 +55,6 @@ const ProductSection = () => {
     // console.log(featuredProducts);
     const featuredProducts = filteredProducts.slice(0, 4);
 
-
-
     return (
         <div className="bg-white py-1 px-10 mt-8">
             <div className="container mx-auto px-4" >
@@ -68,7 +66,7 @@ const ProductSection = () => {
                      data-aos-anchor-placement="bottom-bottom">
                     {/* Map over the sliced array to display only 4 products */}
                     {featuredProducts.map(product => (
-                        <Link to={`/ProductDetailPage/products/${product.id}`} key={product.id}>
+                        <Link to={`/ProductDetailPage/${product.id}`} key={product.id}>
                             <ProductCard
                                 key={product.id}
                                 name={product.title}
@@ -86,7 +84,6 @@ const ProductSection = () => {
                 </div>
                 <div className="flex justify-center mt-12"  data-aos="fade-up"
                      data-aos-anchor-placement="bottom-bottom">
-
                     <Link to="/all-products" className="px-8 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition duration-300">
                         View All
                     </Link>

@@ -6,8 +6,10 @@ import ProductSection from "./ProductSection.jsx";
 import { GetAllProducts } from './features/Product/productSlice.js';
 import { addItemToCart } from './features/Product/CartSlice.js';
 import Loading from "./assets/Coming Soon Loading GIF by Exxeta.gif";
+import { ToastContainer, toast } from 'react-toastify';
 
 const ProductDetailPage = () => {
+    // const notify = () => toast("added Sucessfully !");
     const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -46,6 +48,7 @@ const ProductDetailPage = () => {
 
     const handleAddToCart = () => {
         dispatch(addItemToCart({ ...product, quantity }));
+        toast("added Sucessfully !");
         navigate('/Cart');
     };
     if(isLoading === true){
@@ -102,12 +105,18 @@ const ProductDetailPage = () => {
                                         +
                                     </button>
                                 </div>
-                                <button
-                                    onClick={()=>handleAddToCart()}
-                                    className="w-full md:flex-1 px-6 py-4 bg-gray-900 text-white rounded-full font-bold transition-colors duration-300 hover:bg-gray-700"
-                                >
-                                    Add to Cart
-                                </button>
+                                <div>
+                                    <button
+                                        onClick={()=> {handleAddToCart();}}
+
+                                        className="w-full md:flex-1 px-6 py-4 bg-gray-900 text-white rounded-full font-bold transition-colors duration-300 hover:bg-gray-700"
+                                    >
+
+                                        Add to Cart
+                                    </button>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>

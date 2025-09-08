@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import CheckoutImage from "./assets/CheckoutImage.png";
 import Sucessimage from "./assets/Sucessimage.png";
 import CartEmptyImage from "./assets/CartEmptyImage.png";
@@ -11,7 +11,7 @@ const CheckOutPage = () => {
     const dispatch = useDispatch();
     const timestamp = Date.now();
     const date = new Date(timestamp);
-
+    const token = localStorage.getItem("token");
     const options = { day: "2-digit", month: "long", year: "numeric" };
     const formattedDate = date.toLocaleDateString("en-US", options);
     //use selector to get states from store
@@ -48,7 +48,13 @@ const CheckOutPage = () => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
     // Handler for the "Place Order" button
+    const navigate = useNavigate();
     const handlePlaceOrder = (e) => {
+
+        if(!token) {
+            console.log(111)
+            navigate("/log-in");
+        }
         e.preventDefault();
         const orderData = {
             userID:JSON.parse(localStorage.getItem("user"))[0].id,
@@ -126,6 +132,7 @@ const CheckOutPage = () => {
 
 
     return (
+
         <div className="bg-white-100 font-[Inter] min-h-screen p-4 md:p-8">
             <div className="container mx-auto max-w-7xl">
                 {/* Breadcrumb Navigation */}

@@ -124,13 +124,13 @@ const Profile = () => {
                         {userOrders.length === 0 ? (
                             <p className="text-gray-500">No past orders available.</p>
                         ) : (
-                            <ul className="space-y-4">
+                            <ul className="space-y-4 h-[200px] overflow-auto"  data-aos="fade-up">
                                 {userOrders.map((order) => (
                                     <li
                                         key={order.id}
                                         className="rounded-lg p-4 flex flex-col gap-2 bg-gray-50 cursor-pointer hover:bg-gray-100"
                                         onClick={() => setSelectedOrder(order)}
-                                        data-aos="fade-up"
+
                                     >
                                         <p>
                                             <span className="font-semibold">Order ID:</span>{" "}
