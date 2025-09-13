@@ -32,11 +32,11 @@ function App() {
                 <Route path="/checkout" element={<CheckOutPage/>}/>
                 <Route path="/on-sale" element={<OnSale/>}/>
                 <Route path="/brands" element={<Brands/>}/>
+                {/*<Route path="/Dashboard" element={<Dashboard/>}/>*/}
                 {/*Protected Route*/}
-                <Route element={
-                    <ProtectedRoute/>
-                }>
-                        <Route path="/Dashboard" element={<Dashboard/>}/></Route>
+                <Route element={<ProtectedRoute />}>
+                    <Route path="/Dashboard" element={<Dashboard />} />
+                </Route>
             </Routes>
             <Footer />
             <ToastContainer />
