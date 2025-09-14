@@ -3,14 +3,16 @@
     {
       "id": "1",
       "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-      "price": 109.95,
+      "price": "1000",
       "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
       "category": "men's clothing",
       "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
       "rating": {
         "rate": 3.9,
         "count": 120
-      }
+      },
+      "name": "",
+      "stock": ""
     },
     {
       "id": "2",
@@ -239,6 +241,13 @@
         "rate": 3.6,
         "count": 145
       }
+    },
+    {
+      "id": "21",
+      "title": "Omnis voluptatibus s",
+      "price": "14",
+      "stock": "57",
+      "image": "Quia at maxime fugia"
     }
   ],
   "orders": [
@@ -544,6 +553,41 @@
         }
       ],
       "total": 32.792
+    },
+    {
+      "id": "3c34",
+      "userID": "d11f",
+      "name": "Mira Mckenzie",
+      "email": "xufupikir@mailinator.com",
+      "date": "September 14, 2025",
+      "address": {
+        "street": "Molestiae et sunt iu",
+        "city": "Earum sed error enim",
+        "zip": "82005"
+      },
+      "payment": {
+        "card": "Rerum dolore sint to",
+        "expiration": "Qui duis doloribus e",
+        "cvc": "Est nostrud tempor q"
+      },
+      "items": [
+        {
+          "id": "2",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png"
+        },
+        {
+          "id": "4",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_t.png"
+        },
+        {
+          "id": "14",
+          "quantity": 4,
+          "image": "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_t.png"
+        }
+      ],
+      "total": 3250.6
     }
   ],
   "users": [

@@ -4,6 +4,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, 
 import { FaUsers, FaDollarSign, FaChartLine, FaUserPlus } from "react-icons/fa";
 import { GetAllOrders } from "./features/Product/OrderSlice.js";
 import { GetAllProducts } from "./features/Product/productSlice.js";
+import AdminNavBar   from "./AdminNavBar.jsx";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -58,6 +59,7 @@ const Dashboard = () => {
 
     return (
         <div className="min-h-screen bg-white text-black p-8">
+
             <h1 className="text-3xl font-extrabold mb-8">Dashboard Overview</h1>
 
             {/* Top Stats */}
@@ -82,7 +84,7 @@ const Dashboard = () => {
                     <h3 className="text-lg font-bold mb-4">Sales Overview</h3>
                     <ResponsiveContainer width="100%" height={250}>
                         <LineChart data={salesData}>
-                            <XAxis dataKey="month" stroke="#000" />
+                            <XAxis  dataKey="month" stroke="#000" />
                             <YAxis stroke="#000" />
                             <Tooltip />
                             <Line type="monotone" dataKey="sales" stroke="#1d4ed8" strokeWidth={3} />
@@ -103,18 +105,56 @@ const Dashboard = () => {
                 </div>
             </div>
 
+
             {/* Orders Overview */}
             <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
                 <h3 className="text-lg font-bold mb-4">Recent Orders</h3>
-                <ul className="space-y-3 text-sm text-gray-700">
-                    {recentOrders.map((order, idx) => (
-                        <li key={idx}>
-                            ${order.total} – Order #{order.id} ({new Date(order.createdAt).toLocaleString()})
-                        </li>
-                    ))}
-                </ul>
-
+                <div className="overflow-x-auto">
+                    <table className="w-full border border-gray-200 rounded-xl text-sm">
+                        <thead className="bg-gray-100 text-gray-700">
+                        <tr>
+                            <th className="py-3 px-4 text-left">Order ID</th>
+                            <th className="py-3 px-4 text-left">Products</th>
+                            <th className="py-3 px-4 text-left">Total</th>
+                            <th className="py-3 px-4 text-left">Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {recentOrders.map((order) => (
+                            <tr
+                                key={order.id}
+                                className="border-t hover:bg-gray-50 transition"
+                            >
+                                <td className="py-3 px-4 font-medium text-gray-800">
+                                    #{order.id}
+                                </td>
+                                <td className="py-3 px-4 flex flex-wrap gap-2">
+                                    {order.items?.map((item, i) => (
+                                        <div key={i} className="flex items-center gap-2">
+                                            <img
+                                                src={item.product?.image || "/placeholder.png"}
+                                                alt={item.product?.name}
+                                                className="w-10 h-10 object-cover rounded"
+                                            />
+                                            <span className="text-gray-700">
+                                        {item.product?.name} × {item.quantity}
+                                    </span>
+                                        </div>
+                                    ))}
+                                </td>
+                                <td className="py-3 px-4 text-gray-700">
+                                    ${order.total}
+                                </td>
+                                <td className="py-3 px-4 text-gray-500">
+                                    {new Date(order.createdAt).toLocaleString()}
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </div>
     );
 };

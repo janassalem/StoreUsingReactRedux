@@ -66,7 +66,7 @@ const AllProductsPage = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"  data-aos="fade-right"
                          data-aos-offset="300"
                          data-aos-easing="ease-in-sine" >
-                        {filteredProducts.map(product => (
+                        {[...filteredProducts].reverse().map(product => (
                             <Link to={`/ProductDetailPage/${product.id}`} key={product.id}>
                                 <ProductCard
                                     key={product.id}

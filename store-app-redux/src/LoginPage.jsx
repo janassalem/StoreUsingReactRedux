@@ -28,7 +28,7 @@ const LoginPage = () => {
         console.log(1)
         if (formData.email === "admin" && formData.password === "admin") {
             localStorage.setItem("token", "adminishere");
-            nav("../dashboard")
+            nav("../admin/dashboard")
         }
         else if (user.find((user) => user.email === formData.email && user.password === formData.password)) {
             localStorage.setItem("token", "userishere");
