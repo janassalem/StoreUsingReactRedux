@@ -1,21 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import Dashboard from "./Dashboard.jsx";
 import { IoHomeSharp } from "react-icons/io5";
 import { AiFillProduct } from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
 import AdminProducts from "./AdminProducts.jsx";
+import AdminOrders from "./AdminOrders.jsx";
+import { FaShippingFast } from "react-icons/fa";
 
 const AdminNavBar = () => {
     const [isSideBarOpen, setSideBarOpen] = React.useState(false);
     const [activeComponent, setActiveComponent] = React.useState("Dashboard");
-
+    const [active,setActive]=useState(false)
     const navItems = [
         { name: "Dashboard", icon: IoHomeSharp, component: Dashboard },
         { name: "Products", icon: AiFillProduct, component: AdminProducts },
+        {name: "Orders", icon:FaShippingFast, component:AdminOrders},
     ];
 
-    const toggleSideBar = () => setSideBarOpen(!isSideBarOpen);
+    const openFun=()=>{
+         setSideBarOpen(!isSideBarOpen);
+        setActive(!active)
+    }
 
     const handleNavClick = (ComponentName) => {
         setActiveComponent(ComponentName);
@@ -36,7 +42,7 @@ const AdminNavBar = () => {
                 <div className="p-6 flex flex-col h-full">
                     <div className="flex justify-between items-center mb-8">
                         <h1 className="text-2xl font-bold">Menu</h1>
-                        <button onClick={toggleSideBar}>
+                        <button onClick={openFun}>
                             <MdOutlineCancel className="h-6 w-6" />
                         </button>
                     </div>
@@ -60,20 +66,24 @@ const AdminNavBar = () => {
             {/* Overlay for mobile */}
             {isSideBarOpen && (
                 <div
-                    className="fixed inset-0 bg-black bg-opacity-20 z-30"
-                    onClick={toggleSideBar}
+                    className={`flex-1 p-4 md:p-8 overflow-y-auto transition-all duration-300 
+                ${isSideBarOpen ? "md:-ml-250" : "md:ml-0"}`}
+                    onClick={openFun}
                 ></div>
             )}
 
             {/* Main Content */}
             <div className="flex-1 p-4 md:p-8 overflow-y-auto">
                 {/* Menu button (always visible) */}
-                <div className="mb-4">
-                    <button onClick={toggleSideBar}>
-                        <IoMdMenu className="h-8 w-8" />
-                    </button>
-                </div>
+                {
+                    active === false &&
+                    <div className="mb-4">
+                        <button onClick={openFun}>
+                            <IoMdMenu className="h-8 w-8" />
+                        </button>
+                    </div>
 
+                }
                 {/* Render the selected component */}
                 <CurrentComponent />
             </div>

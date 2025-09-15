@@ -17,15 +17,18 @@ import {ToastContainer} from "react-toastify";
 import OnSale from "./OnSale.jsx";
 import Brands from "./Brands.jsx";
 import AdminNavBar from "./AdminNavBar.jsx";
+import {useEffect, useState} from "react";
 
 function App() {
-    const token = localStorage.getItem("token");
-
+    const [token,setWToken] = useState();
+    useEffect(()=>{
+        setWToken(localStorage.getItem("token"))
+    },[token])
+    console.log(token)
     return (
         <Router>
             {/* Show Navbar for normal users, AdminNavBar for admins */}
-            {token === "admin" ? <AdminNavBar /> : <Navbar />}
-
+            {/*{token =="userishere" &&  <Navbar />}*/}
             <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/ProductDetailPage/:id" element={<ProductDetailPage />} />

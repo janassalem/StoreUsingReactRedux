@@ -15,14 +15,16 @@ export const placeOrder = createAsyncThunk(
     'orders/placeOrder',
     async (orderData, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`http://localhost:3000/orders`, orderData);
+            const newOrder = { ...orderData, status: "Pending" };
+            console.log(newOrder)
+            const response = await axios.post(`http://localhost:3000/orders`, newOrder);
             return response.data;
         } catch (e) {
-            // Return the error message to be handled by the rejected state
             return rejectWithValue(e.message);
         }
     }
 );
+
 
 
 export const GetSpOrders = createAsyncThunk(
@@ -50,7 +52,17 @@ export const GetAllOrders = createAsyncThunk(
     }
 );
 
-
+export const updateOrder = createAsyncThunk(
+    "orders/updateOrder",
+    async ({ id, updates }, { rejectWithValue }) => {
+        try {
+            const response = await axios.put(`http://localhost:3000/orders/${id}`, updates);
+            return response.data;
+        } catch (e) {
+            return rejectWithValue(e.message);
+        }
+    }
+);
 export const putOrder = createAsyncThunk(
     'putorder/orders',
     async (data, { rejectWithValue }) => {
@@ -96,6 +108,17 @@ const orderSlice = createSlice({
             })
             .addCase(GetAllOrders.fulfilled,(state,action)=>{
                 state.orders = action.payload;
+            })
+            .addCase(updateOrder.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateOrder.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.orders.push(action.payload);
+            })
+            .addCase(updateOrder.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload; // action.payload contains the error message from rejectWithValue
             })
 
 
