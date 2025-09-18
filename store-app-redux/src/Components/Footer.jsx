@@ -3,11 +3,11 @@ import { FaFacebook } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaGithub } from "react-icons/fa6";
-import Visa from "./assets/Visa.svg"
-import Master from "./assets/MasterCard.svg"
-import PayPal from "./assets/PayPal.svg"
-import GooglePay from "./assets/Google Pay.svg"
-import ApplePay from "./assets/Apple Pay.svg"
+import Visa from "../assets/Visa.svg"
+import Master from "../assets/MasterCard.svg"
+import PayPal from "../assets/PayPal.svg"
+import GooglePay from "../assets/Google Pay.svg"
+import ApplePay from "../assets/Apple Pay.svg"
 const Footer = () => {
 
     return (

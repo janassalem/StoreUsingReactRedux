@@ -1,5 +1,5 @@
 import React from 'react'
-import CartEmptyImage from "./assets/CartEmptyImage.png";
+import CartEmptyImage from "../../assets/CartEmptyImage.png";
 import {Link} from "react-router-dom";
 import "aos/dist/aos.css";
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { FaTrash } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { removeItemFromCart, updateQuantity } from "./features/Product/CartSlice.js";
+import { removeItemFromCart, updateQuantity } from "../../features/Product/CartSlice.js";
 import {Link} from "react-router-dom";
-import CartEmptyImage from "./assets/CartEmptyImage.png";
+import CartEmptyImage from "../../assets/CartEmptyImage.png";
 import "aos/dist/aos.css";
 import {toast, ToastContainer} from "react-toastify";
 

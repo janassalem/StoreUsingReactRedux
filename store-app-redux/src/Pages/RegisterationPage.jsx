@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import LoginImage from "./assets/LoginImage.png"
+import LoginImage from "../assets/LoginImage.png"
 import { FaGoogle, FaApple } from "react-icons/fa";
 import AOS from "aos";
 import axios from "axios";

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {GetAllOrders} from "./features/Product/OrderSlice.js";
-import Loading from "./assets/Coming Soon Loading GIF by Exxeta.gif";
+import {GetAllOrders} from "../features/Product/OrderSlice.js";
+import Loading from "../assets/Coming Soon Loading GIF by Exxeta.gif";
 import {motion} from "motion/react";
 
 const PopUp = ({order}) => {

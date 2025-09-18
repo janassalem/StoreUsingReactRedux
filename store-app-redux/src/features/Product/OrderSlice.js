@@ -56,7 +56,7 @@ export const updateOrder = createAsyncThunk(
     "orders/updateOrder",
     async ({ id, updates }, { rejectWithValue }) => {
         try {
-            const response = await axios.put(`http://localhost:3000/orders/${id}`, updates);
+            const response = await axios.patch(`http://localhost:3000/orders/${id}`, updates);
             return response.data;
         } catch (e) {
             return rejectWithValue(e.message);

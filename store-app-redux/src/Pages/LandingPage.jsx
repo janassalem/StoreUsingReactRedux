@@ -1,6 +1,6 @@
 import React from 'react'
-import HeroSection from "./HeroSection.jsx";
-import ProductSection from "./ProductSection.jsx";
+import HeroSection from "../Components/User/HeroSection.jsx";
+import ProductSection from "../Components/ProductSection.jsx";
 import TopSelling from "./TopSelling.jsx";
 
 

@@ -244,10 +244,10 @@
     },
     {
       "id": "21",
-      "title": "Omnis voluptatibus s",
-      "price": "14",
-      "stock": "57",
-      "image": "Quia at maxime fugia"
+      "title": "Eiusmod est proident",
+      "price": "15",
+      "stock": "22",
+      "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_t.png"
     }
   ],
   "orders": [
@@ -276,6 +276,58 @@
       ],
       "total": 30.392,
       "status": "Cancelled"
+    },
+    {
+      "id": "f0d6",
+      "userID": "d11f",
+      "name": "Hamish Sutton",
+      "email": "japetu@mailinator.com",
+      "date": "September 18, 2025",
+      "address": {
+        "street": "Eveniet quisquam nu",
+        "city": "Elit velit placeat",
+        "zip": "17164"
+      },
+      "payment": {
+        "card": "Esse quidem cupidat",
+        "expiration": "Quisquam ea ab paria",
+        "cvc": "Sed quia exercitatio"
+      },
+      "items": [
+        {
+          "id": "20",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_t.png"
+        }
+      ],
+      "total": 30.392,
+      "status": "Shipped"
+    },
+    {
+      "id": "cda0",
+      "userID": "e9bb",
+      "name": "Quyn Bright",
+      "email": "gajuq@mailinator.com",
+      "date": "September 18, 2025",
+      "address": {
+        "street": "Corporis vel dolore ",
+        "city": "Culpa nulla adipisc",
+        "zip": "51918"
+      },
+      "payment": {
+        "card": "Ab accusamus deserun",
+        "expiration": "Distinctio Sunt des",
+        "cvc": "Eum dolore do except"
+      },
+      "items": [
+        {
+          "id": "18",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_t.png"
+        }
+      ],
+      "total": 27.88,
+      "status": "Pending"
     }
   ],
   "users": [
@@ -283,43 +335,56 @@
       "id": "0",
       "name": "admin",
       "email": "admin@gmail.com",
-      "password": "admin"
+      "password": "admin",
+      "role": "admin"
     },
     {
       "id": "d11f",
       "name": "ziad",
       "email": "ziad@gmail.com",
-      "password": "102030"
+      "password": "102030",
+      "role": "user"
     },
     {
       "id": "6ced",
       "name": "jana",
       "email": "jana@gmail.com",
-      "password": "102030"
+      "password": "102030",
+      "role": "user"
     },
     {
       "id": "2e35",
       "name": "ali",
       "email": "ali@gmail.com",
-      "password": "102030"
+      "password": "102030",
+      "role": "user"
     },
     {
       "id": "bc24",
       "name": "Linus Mcneil",
       "email": "kozihuk@mailinator.com",
-      "password": "Pa$$w0rd!"
+      "password": "Pa$$w0rd!",
+      "role": "user"
     },
     {
       "id": "3c5c",
       "name": "Beatrice Reilly",
       "email": "geneqaw@mailinator.com",
-      "password": "Pa$$w0rd!"
+      "password": "Pa$$w0rd!",
+      "role": "user"
     },
     {
       "id": "694f",
       "name": "Brent Rosario",
       "email": "comyzo@mailinator.com",
-      "password": "Pa$$w0rd!"
+      "password": "Pa$$w0rd!",
+      "role": "user"
+    },
+    {
+      "id": "e9bb",
+      "name": "Baekhyun",
+      "email": "baekhyun100@inb.com",
+      "password": "EXO"
     }
   ]
 }

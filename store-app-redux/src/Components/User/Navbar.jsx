@@ -6,7 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import SearchBar from "./SearchBar.jsx";
 import { useSelector, useDispatch } from 'react-redux';
 import { MdOutlineLogout } from "react-icons/md";
-import { logout } from './features/Auth/authSlice.js';
+import { logout } from '../../features/Auth/authSlice.js';
 import { CgProfile } from "react-icons/cg";
 import "aos/dist/aos.css";
 
@@ -25,7 +25,7 @@ const Navbar = () => {
         e.preventDefault();
         dispatch(logout());
         localStorage.removeItem("token");
-        nav("/profile");
+        nav("/"); // 👈 redirect to homepage instead of /profile
     };
 
     const handleLinkClick = () => setMobileMenuOpen(false);

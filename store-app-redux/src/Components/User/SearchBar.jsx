@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { IoSearchSharp } from "react-icons/io5";
-import { searchProducts } from './features/Product/productSlice.js';
+import { searchProducts } from '../../features/Product/productSlice.js';
 
 const SearchBar = () => {
     const [query, setQuery] = useState('');

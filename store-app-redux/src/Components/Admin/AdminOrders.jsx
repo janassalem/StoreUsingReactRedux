@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllOrders, updateOrder } from "./features/Product/OrderSlice.js";
+import { GetAllOrders, updateOrder } from "../../features/Product/OrderSlice.js";
 
-const AdminProducts = () => {
+const AdminOrders = () => {
     const dispatch = useDispatch();
     const { orders, isLoading, error } = useSelector((state) => state.OrderSlice);
 
@@ -11,9 +11,9 @@ const AdminProducts = () => {
     }, [dispatch]);
 
     const handleStatusChange = (id, newStatus) => {
-        const filter=orders.find((item)=>item.id === id)
-        dispatch(updateOrder({ id, updates: { ...filter , status: newStatus } }));
+        dispatch(updateOrder({ id, updates: { status: newStatus } }));
     };
+
 
     return (
         <div className="container mx-auto">
@@ -83,4 +83,4 @@ const AdminProducts = () => {
     );
 };
 
-export default AdminProducts;
+export default AdminOrders;

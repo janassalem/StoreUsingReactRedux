@@ -1,18 +1,19 @@
-import React, {useEffect} from 'react'
-import ProductCard from './ProductCard';
+import React, {useEffect} from 'react';
+import ProductCard from './ProductCard.jsx';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { GetAllProducts } from './features/Product/productSlice.js';
+import { GetAllProducts } from '../features/Product/productSlice.js';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const TopSelling = () => {
+const ProductSection = () => {
+
+
     const dispatch = useDispatch();
-    // Correcting the state selector. The slice name is 'products' not 'ProductState'
-    const { products, isLoading, error } = useSelector((state) => state.ProductState);
+
+    const {filteredProducts, products, isLoading, error} = useSelector((state) => state.ProductState);
 
     useEffect(() => {
-        dispatch(GetAllProducts());
         AOS.init({
             once: false,
         });
@@ -42,20 +43,24 @@ const TopSelling = () => {
         );
     }
 
+    if (filteredProducts.length === 0) {
+        return (
+            <div className="flex justify-center items-center py-20 text-xl text-gray-500">
+                No products match your search.
+            </div>
+        );
+    }
 
 
-
-
-    // Slice the products array to get only the first 4 items for "New Arrivals"
-    const featuredProducts = products.slice(5, 9);
+    // console.log(featuredProducts);
+    const featuredProducts = filteredProducts.slice(0, 4);
 
     return (
         <div className="bg-white py-1 px-10 mt-8">
-            <div className="container mx-auto px-4" data-aos="fade-up"
-                 data-aos-anchor-placement="bottom-bottom">
-                <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8"  data-aos="fade-up"
-                    data-aos-anchor-placement="bottom-bottom">
-                    TOP SELLING
+            <div className="container mx-auto px-4" >
+                <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8" data-aos="fade-up"
+                    data-aos-anchor-placement="top-bottom">
+                    NEW ARRIVALS
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"  data-aos="fade-up"
                      data-aos-anchor-placement="bottom-bottom">
@@ -69,6 +74,7 @@ const TopSelling = () => {
                                 price={product.price}
                                 rating={product.rating}
                                 // The API response doesn't contain these props
+                                // rating={product.rating}
                                 // reviews={product.reviews}
                                 // originalPrice={product.originalPrice}
                                 // discount={product.discount}
@@ -78,7 +84,6 @@ const TopSelling = () => {
                 </div>
                 <div className="flex justify-center mt-12"  data-aos="fade-up"
                      data-aos-anchor-placement="bottom-bottom">
-                    {/* Changed the button to a Link for navigation */}
                     <Link to="/all-products" className="px-8 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition duration-300">
                         View All
                     </Link>
@@ -89,4 +94,4 @@ const TopSelling = () => {
     );
 };
 
-export default TopSelling;
+export default ProductSection;

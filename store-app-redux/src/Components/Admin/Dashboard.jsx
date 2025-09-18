@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
 import { FaUsers, FaDollarSign, FaChartLine, FaUserPlus } from "react-icons/fa";
-import { GetAllOrders } from "./features/Product/OrderSlice.js";
-import { GetAllProducts } from "./features/Product/productSlice.js";
+import { GetAllOrders } from "../../features/Product/OrderSlice.js";
+import { GetAllProducts } from "../../features/Product/productSlice.js";
 import AdminNavBar   from "./AdminNavBar.jsx";
 
 const Dashboard = () => {

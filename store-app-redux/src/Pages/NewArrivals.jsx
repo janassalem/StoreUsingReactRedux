@@ -1,14 +1,14 @@
 import React from 'react';
-import ProductCard from './ProductCard.jsx';
+import ProductCard from '../Components/ProductCard.jsx';
 import {Link} from "react-router-dom";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetAllProducts } from './features/Product/productSlice.js';
+import { GetAllProducts } from '../features/Product/productSlice.js';
 import AOS from "aos";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Loading from '../assets/Coming Soon Loading GIF by Exxeta.gif';
 
-import Loading from  './assets/Coming Soon Loading GIF by Exxeta.gif';
-
-const AllProductsPage = () => {
+const NeWArrivals = () => {
     const dispatch = useDispatch();
     const { filteredProducts,products, isLoading, error } = useSelector((state) => state.ProductState);
 
@@ -60,13 +60,13 @@ const AllProductsPage = () => {
                 <div className="container mx-auto px-4">
                     <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8" data-aos="fade-up"
                         data-aos-anchor-placement="center-bottom">
-                        {filteredProducts.length < 20 ? "SEARCH RESULTS" : "ALL PRODUCTS"}
+                        {filteredProducts.length < 20 ? "SEARCH RESULTS" : "NEW ARRIVALS"}
 
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"  data-aos="fade-right"
                          data-aos-offset="300"
                          data-aos-easing="ease-in-sine" >
-                        {[...filteredProducts].reverse().map(product => (
+                        {filteredProducts.map(product => (
                             <Link to={`/ProductDetailPage/${product.id}`} key={product.id}>
                                 <ProductCard
                                     key={product.id}
@@ -99,4 +99,4 @@ const AllProductsPage = () => {
 
 };
 
-export default AllProductsPage;
+export default NeWArrivals;

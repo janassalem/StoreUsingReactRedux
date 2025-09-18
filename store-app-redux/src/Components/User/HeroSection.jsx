@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { PiStarFourFill } from "react-icons/pi";
-import HeroImage from './assets/8384779.png';
+import HeroImage from '../../assets/8384779.png';
 import {Link} from "react-router-dom";
 import AOS from 'aos';
 import 'aos/dist/aos.css';

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import ProductCard from './ProductCard.jsx';
+import ProductCard from '../Components/ProductCard.jsx';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { GetAllProducts } from './features/Product/productSlice.js';
+import { GetAllProducts } from '../features/Product/productSlice.js';
 import AOS from "aos";
 
-import Loading from './assets/Coming Soon Loading GIF by Exxeta.gif';
+import Loading from '../assets/Coming Soon Loading GIF by Exxeta.gif';
 
-const OnSale = () => {
+const Brands = () => {
     const dispatch = useDispatch();
     const { products, isLoading, error } = useSelector((state) => state.ProductState);
 
@@ -18,8 +18,9 @@ const OnSale = () => {
         dispatch(GetAllProducts());
     }, [dispatch]);
 
-    // filter only on-sale products
-    const onSaleProducts = products.filter(product => product.discount > 0 || product.onSale);
+    // Example: filter by brand (change "Nike" to the brand you want)
+    const brandName = "Nike";
+    const brandProducts = products.filter(product => product.brand === brandName);
 
     if (error) {
         return (
@@ -37,10 +38,10 @@ const OnSale = () => {
         );
     }
 
-    if (onSaleProducts.length === 0) {
+    if (brandProducts.length === 0) {
         return (
             <div className="flex justify-center items-center py-20 text-xl text-gray-500">
-                No products are currently on sale.
+                No products found for {brandName}.
             </div>
         );
     }
@@ -63,7 +64,7 @@ const OnSale = () => {
                         data-aos="fade-up"
                         data-aos-anchor-placement="center-bottom"
                     >
-                        ON SALE
+                        {brandName.toUpperCase()} PRODUCTS
                     </h2>
                     <div
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
@@ -71,7 +72,7 @@ const OnSale = () => {
                         data-aos-offset="300"
                         data-aos-easing="ease-in-sine"
                     >
-                        {onSaleProducts.map(product => (
+                        {brandProducts.map(product => (
                             <Link to={`/ProductDetailPage/${product.id}`} key={product.id}>
                                 <ProductCard
                                     key={product.id}
@@ -79,9 +80,6 @@ const OnSale = () => {
                                     image={product.image}
                                     price={product.price}
                                     rating={product.rating}
-                                    // extra fields if your ProductCard supports them
-                                    // originalPrice={product.originalPrice}
-                                    // discount={product.discount}
                                 />
                             </Link>
                         ))}
@@ -93,4 +91,4 @@ const OnSale = () => {
     }
 };
 
-export default OnSale;
+export default Brands;

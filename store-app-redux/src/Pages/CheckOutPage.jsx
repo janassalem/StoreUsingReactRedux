@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useNavigate} from "react-router-dom";
-import CheckoutImage from "./assets/CheckoutImage.png";
-import Sucessimage from "./assets/Sucessimage.png";
-import CartEmptyImage from "./assets/CartEmptyImage.png";
-import { placeOrder } from "./features/Product/OrderSlice.js";
-import { clearCart } from "./features/Product/CartSlice.js";
+import CheckoutImage from "../assets/CheckoutImage.png";
+import Sucessimage from "../assets/Sucessimage.png";
+import CartEmptyImage from "../assets/CartEmptyImage.png";
+import { placeOrder } from "../features/Product/OrderSlice.js";
+import { clearCart } from "../features/Product/CartSlice.js";
 
 const CheckOutPage = () => {
     const dispatch = useDispatch();
@@ -57,7 +57,7 @@ const CheckOutPage = () => {
         }
         e.preventDefault();
         const orderData = {
-            userID:JSON.parse(localStorage.getItem("user"))[0].id,
+            userID:JSON.parse(localStorage.getItem("user")).id,
             name: formData.fullName,
             email: formData.email,
             date:formattedDate,

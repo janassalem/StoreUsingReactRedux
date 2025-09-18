@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate} from 'react-router-dom';
 import { useSelector , useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
-import ProductSection from "./ProductSection.jsx";
-import { GetAllProducts } from './features/Product/productSlice.js';
-import { addItemToCart } from './features/Product/CartSlice.js';
-import Loading from "./assets/Coming Soon Loading GIF by Exxeta.gif";
+import ProductSection from "../Components/ProductSection.jsx";
+import { GetAllProducts } from '../features/Product/productSlice.js';
+import { addItemToCart } from '../features/Product/CartSlice.js';
+import Loading from "../assets/Coming Soon Loading GIF by Exxeta.gif";
 import { ToastContainer, toast } from 'react-toastify';
 
 const ProductDetailPage = () => {
