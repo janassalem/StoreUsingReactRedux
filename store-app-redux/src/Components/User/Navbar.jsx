@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoSettingsSharp, IoPersonSharp, IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar.jsx";
 import { useSelector, useDispatch } from 'react-redux';
 import { MdOutlineLogout } from "react-icons/md";
 import { logout } from '../../features/Auth/authSlice.js';
+import { clearCart } from '../../features/Product/CartSlice.js';
 import { CgProfile } from "react-icons/cg";
 import "aos/dist/aos.css";
 
@@ -20,16 +21,24 @@ const Navbar = () => {
     const dispatch = useDispatch();
 
     const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role"); // 👈 check the role here
 
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
+        dispatch(clearCart()); // 👈 clear cart on logout
         localStorage.removeItem("token");
-        nav("/"); // 👈 redirect to homepage instead of /profile
+        localStorage.removeItem("role");
+
+        // Redirect based on role
+        if (role === "admin") {
+            nav("/admin-login");
+        } else {
+            nav("/log-in");
+        }
     };
 
     const handleLinkClick = () => setMobileMenuOpen(false);
-
 
     return (
         <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md rounded-lg flex items-center justify-between p-4 md:px-10"
@@ -64,9 +73,9 @@ const Navbar = () => {
                     )}
                 </Link>
 
-                {/* Profile Dropdown */}
+                {/* Profile/Admin Dropdown */}
                 <div className="relative">
-                    {token? (
+                    {token ? (
                         <>
                             <button
                                 onClick={() => setProfileMenuOpen(!isProfileMenuOpen)}
@@ -74,92 +83,47 @@ const Navbar = () => {
                             >
                                 <IoPersonSharp size={24} />
                             </button>
-                            {isProfileMenuOpen  && (
-                                <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg py-2 z-50">
-                                    {token ? (
+                            {isProfileMenuOpen && (
+                                <div className="absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg py-2 z-50">
+                                    {role === "admin" ? (
                                         <>
-                                            <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:text-indigo-600" onClick={() => setProfileMenuOpen(false)}>
+                                            <Link to="/admin-dashboard" className="block px-4 py-2 text-gray-800 hover:text-indigo-600" onClick={() => setProfileMenuOpen(false)}>
                                                 <div className="flex flex-row gap-4">
-                                                    <CgProfile  size={24} />
-                                                    <span>
-                                               My profile
-                                           </span>
+                                                    <CgProfile size={24} />
+                                                    <span>Admin Dashboard</span>
                                                 </div>
                                             </Link>
-                                            <button
-                                                onClick={handleLogout}
-                                                className="w-full text-left px-4 py-2 text-gray-800 hover:text-indigo-600"
-                                            >
-                                                <div className="flex flex-row gap-4">
-                                                    <MdOutlineLogout size={24} />
-                                                    <span>
-                                                logout
-                                           </span>
-                                                </div>
-                                            </button>
                                         </>
                                     ) : (
                                         <>
                                             <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:text-indigo-600" onClick={() => setProfileMenuOpen(false)}>
-
+                                                <div className="flex flex-row gap-4">
+                                                    <CgProfile size={24} />
+                                                    <span>My Profile</span>
+                                                </div>
                                             </Link>
-
                                         </>
                                     )}
+                                    <button
+                                        onClick={handleLogout}
+                                        className="w-full text-left px-4 py-2 text-gray-800 hover:text-indigo-600"
+                                    >
+                                        <div className="flex flex-row gap-4">
+                                            <MdOutlineLogout size={24} />
+                                            <span>Logout</span>
+                                        </div>
+                                    </button>
                                 </div>
                             )}
                         </>
-                    )
-                    :
-                        (
-                            <>
-                                <Link to="/profile"
-                                      onClick={handleLinkClick}
-
-                                    className="text-gray-600 hover:text-indigo-600 focus:outline-none"
-                                >
-                                    <IoPersonSharp size={24} />
-                                </Link>
-                            </>
-
-
-                        )}
-
-
-                    {/*{isProfileMenuOpen  && (*/}
-                    {/*    <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg py-2 z-50">*/}
-                    {/*        {token ? (*/}
-                    {/*            <>*/}
-                    {/*                <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:text-indigo-600" onClick={() => setProfileMenuOpen(false)}>*/}
-                    {/*                    <div className="flex flex-row gap-4">*/}
-                    {/*                        <CgProfile  size={24} />*/}
-                    {/*                        <span>*/}
-                    {/*                           My profile*/}
-                    {/*                       </span>*/}
-                    {/*                    </div>*/}
-                    {/*                </Link>*/}
-                    {/*                <button*/}
-                    {/*                    onClick={handleLogout}*/}
-                    {/*                    className="w-full text-left px-4 py-2 text-gray-800 hover:text-indigo-600"*/}
-                    {/*                >*/}
-                    {/*                    <div className="flex flex-row gap-4">*/}
-                    {/*                        <MdOutlineLogout size={24} />*/}
-                    {/*                        <span>*/}
-                    {/*                            logout*/}
-                    {/*                       </span>*/}
-                    {/*                    </div>*/}
-                    {/*                </button>*/}
-                    {/*            </>*/}
-                    {/*        ) : (*/}
-                    {/*            <>*/}
-                    {/*                <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:text-indigo-600" onClick={() => setProfileMenuOpen(false)}>*/}
-                    {/*                   */}
-                    {/*                </Link>*/}
-                    {/*               */}
-                    {/*            </>*/}
-                    {/*        )}*/}
-                    {/*    </div>*/}
-                    {/*)}*/}
+                    ) : (
+                        <Link to="/log-in"
+                              onClick={handleLinkClick}
+                              className="text-gray-600 hover:text-indigo-600 focus:outline-none"
+                        >
+                            <IoPersonSharp size={24} />
+                        </Link>
+                    )}
                 </div>
             </div>
 
@@ -186,7 +150,7 @@ const Navbar = () => {
                                     </span>
                                 )}
                             </Link>
-                            <Link to="/profile" className="flex items-center space-x-2 text-gray-800 hover:bg-gray-100 p-2 rounded-lg" onClick={handleLinkClick}>
+                            <Link to={role === "admin" ? "/admin-dashboard" : "/profile"} className="flex items-center space-x-2 text-gray-800 hover:bg-gray-100 p-2 rounded-lg" onClick={handleLinkClick}>
                                 <IoPersonSharp size={20} />
                             </Link>
                             <Link to="/settings" className="flex items-center space-x-2 text-gray-800 hover:bg-gray-100 p-2 rounded-lg" onClick={handleLinkClick}>

@@ -5,6 +5,8 @@ import { AiFillProduct } from "react-icons/ai";
 import { FaShippingFast } from "react-icons/fa";
 import { MdOutlineCancel, MdLogout } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
+import { FaShopify } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 const AdminNavBar = () => {
     const [isSideBarOpen, setSideBarOpen] = React.useState(false);
@@ -14,6 +16,7 @@ const AdminNavBar = () => {
         { name: "Dashboard", icon: IoHomeSharp, path: "/admin/dashboard" },
         { name: "Products", icon: AiFillProduct, path: "/admin/product" },
         { name: "Orders", icon: FaShippingFast, path: "/admin/orders" },
+        { name: "Home Page", icon: FaShopify, path: "/" },
     ];
 
     const toggleSidebar = () => {
@@ -29,65 +32,99 @@ const AdminNavBar = () => {
     return (
         <div className="bg-white text-gray-800 flex min-h-screen">
             {/* Sidebar */}
-            <div
-                className={`fixed top-0 left-0 h-screen z-40 transform transition-transform duration-300 ease-in-out
-          ${isSideBarOpen ? "translate-x-0" : "-translate-x-full"}
-          w-64 bg-white shadow-md`}
-            >
-                <div className="p-6 flex flex-col h-full">
-                    <div className="flex justify-between items-center mb-8">
-                        <h1 className="text-2xl font-bold">Admin</h1>
-                        <button onClick={toggleSidebar}>
-                            <MdOutlineCancel className="h-6 w-6" />
-                        </button>
-                    </div>
-
-                    <nav className="flex flex-col space-y-2 flex-grow">
-                        {navItems.map((item) => (
-                            <NavLink
-                                key={item.name}
-                                to={item.path}
-                                className={({ isActive }) =>
-                                    `flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                                        isActive ? "bg-gray-200 font-semibold" : "hover:bg-gray-200"
-                                    }`
-                                }
-                                onClick={() => setSideBarOpen(false)}
-                            >
-                                <item.icon className="h-6 w-6" />
-                                <span className="text-lg">{item.name}</span>
-                            </NavLink>
-                        ))}
-                    </nav>
-
-                    {/* Logout */}
-                    <button
-                        onClick={handleLogout}
-                        className="flex items-center space-x-3 p-3 rounded-lg bg-red-500 text-white hover:bg-red-600 mt-auto"
+            <AnimatePresence>
+                {isSideBarOpen && (
+                    <motion.div
+                        initial={{ x: -300 }}
+                        animate={{ x: 0 }}
+                        exit={{ x: -300 }}
+                        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                        className="fixed top-0 left-0 h-screen z-40 w-64 bg-white shadow-lg"
                     >
-                        <MdLogout className="h-6 w-6" />
-                        <span className="text-lg">Logout</span>
-                    </button>
-                </div>
-            </div>
+                        <div className="p-6 flex flex-col h-full">
+                            {/* Header */}
+                            <div className="flex justify-between items-center mb-8">
+                                <motion.h1
+                                    initial={{ opacity: 0, y: -20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.2 }}
+                                    className="text-2xl font-bold"
+                                >
+                                    Admin Panel
+                                </motion.h1>
+                                <motion.button
+                                    whileHover={{ rotate: 90, scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    onClick={toggleSidebar}
+                                >
+                                    <MdOutlineCancel className="h-6 w-6" />
+                                </motion.button>
+                            </div>
+
+                            {/* Navigation Items */}
+                            <nav className="flex flex-col space-y-2 flex-grow">
+                                {navItems.map((item, index) => (
+                                    <motion.div
+                                        key={item.name}
+                                        initial={{ opacity: 0, x: -50 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                    >
+                                        <NavLink
+                                            to={item.path}
+                                            className={({ isActive }) =>
+                                                `flex items-center space-x-3 p-3 rounded-lg transition-colors ${
+                                                    isActive
+                                                        ? "bg-gray-200 font-semibold"
+                                                        : "hover:bg-gray-200"
+                                                }`
+                                            }
+                                            onClick={() => setSideBarOpen(false)}
+                                        >
+                                            <item.icon className="h-6 w-6" />
+                                            <span className="text-lg">{item.name}</span>
+                                        </NavLink>
+                                    </motion.div>
+                                ))}
+                            </nav>
+
+                            {/* Logout */}
+                            <motion.button
+                                whileHover={{ scale: 1.05, backgroundColor: "#dc2626" }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={handleLogout}
+                                className="flex items-center space-x-3 p-3 rounded-lg bg-red-500 text-white mt-auto"
+                            >
+                                <MdLogout className="h-6 w-6" />
+                                <span className="text-lg">Logout</span>
+                            </motion.button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Main Content */}
-            <div className=" p-4 md:p-8 ">
-                {/* Menu button */}
+            <div
+                className={`flex-1 transition-all duration-300 ${
+                    isSideBarOpen ? "ml-0 md:ml-64" : "ml-0"
+                } p-4 md:p-8`}
+            >
                 {!isSideBarOpen && (
-                    <div className="mb-4">
-                        <button onClick={toggleSidebar}>
-                            <IoMdMenu className="h-8 w-8" />
-                        </button>
-                    </div>
+                    <motion.button
+                        onClick={toggleSidebar}
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="mb-4"
+                    >
+                        <IoMdMenu className="h-8 w-8" />
+                    </motion.button>
                 )}
 
                 {/* Render child routes */}
-                <div className="   h-full">
+                <div className="h-full">
                     <div className="min-h-[70vh]">
-                        {/* Child route content */}
                         <React.Suspense fallback={<p>Loading...</p>}>
-                            {/* Will render whatever child route is active */}
+                            {/* Child route content */}
                         </React.Suspense>
                     </div>
                 </div>
