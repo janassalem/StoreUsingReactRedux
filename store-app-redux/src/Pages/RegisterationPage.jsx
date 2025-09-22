@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import LoginImage from "../assets/LoginImage.png"
+import LoginImage from "../assets/LoginImage.png";
 import { FaGoogle, FaApple } from "react-icons/fa";
 import AOS from "aos";
 import axios from "axios";
-import {Link, useNavigate} from "react-router-dom";
-import {toast} from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RegisterationPage = () => {
     const navigate = useNavigate();
@@ -14,7 +14,6 @@ const RegisterationPage = () => {
         password: "",
         terms: false
     });
-
     const [message, setMessage] = useState("");
 
     useEffect(() => {
@@ -36,21 +35,21 @@ const RegisterationPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        toast("Registeration Sucessfull!");
+        toast("Registration Successful!");
         if (!formData.terms) {
             setMessage("You must agree to the terms.");
             return;
         }
 
         try {
-            // check if user already exists
+            // Check if user already exists
             const res = await axios.get(`http://localhost:3000/users?email=${formData.email}`);
             if (res.data.length > 0) {
                 setMessage("User already exists with this email.");
                 return;
             }
 
-            // create new user
+            // Create new user
             await axios.post("http://localhost:3000/users", {
                 name: formData.name,
                 email: formData.email,
@@ -58,7 +57,7 @@ const RegisterationPage = () => {
             });
 
             setMessage("Registration successful! You can now login.");
-            navigate("/profile")
+            navigate("/log-in");
             setFormData({ name: "", email: "", password: "", terms: false });
         } catch (error) {
             console.error(error);
@@ -67,61 +66,31 @@ const RegisterationPage = () => {
     };
 
     return (
-        <div className=" bg-white flex items-center justify-center w-full mt-20 ">
-            <div className="bg-white rounded-3xl overflow-hidden flex flex-col lg:flex-row max-w-6xl w-full">
-                {/* Left side: Form */}
+        <div className="bg-[var(--bg)] text-[var(--text)] flex items-center justify-center w-full mt-20 transition-colors duration-300">
+            <div className="rounded-3xl overflow-hidden flex flex-col lg:flex-row max-w-6xl w-full shadow-lg">
+                {/* Left: Form */}
                 <div className="w-full lg:w-1/2 p-8 md:p-16 flex flex-col justify-center" data-aos="flip-left">
-                    <h1 className="text-3xl font-bold mb-8 text-neutral-800">Get Started Now</h1>
-
+                    <h1 className="text-3xl font-bold mb-8 text-[var(--text)]">Get Started Now</h1>
                     <form className="space-y-6" onSubmit={handleSubmit}>
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                            <div className="mt-1">
-                                <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    placeholder="Enter your name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    required
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                                />
+                        {["name", "email", "password"].map((field) => (
+                            <div key={field}>
+                                <label htmlFor={field} className="block text-sm font-medium text-[var(--muted)] capitalize">{field}</label>
+                                <div className="mt-1">
+                                    <input
+                                        id={field}
+                                        name={field}
+                                        type={field === "password" ? "password" : "text"}
+                                        placeholder={`Enter your ${field}`}
+                                        value={formData[field]}
+                                        onChange={handleChange}
+                                        required
+                                        className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-[var(--muted)] focus:outline-none focus:ring-[var(--accent)] focus:border-[var(--accent)] sm:text-sm bg-[var(--bg)] text-[var(--text)]"
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        ))}
 
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
-                            <div className="mt-1">
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-                            <div className="mt-1">
-                                <input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    placeholder="Enter your password"
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                    required
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
-                                />
-                            </div>
-                        </div>
-
+                        {/* Terms */}
                         <div className="flex items-start">
                             <div className="flex items-center">
                                 <input
@@ -130,20 +99,21 @@ const RegisterationPage = () => {
                                     type="checkbox"
                                     checked={formData.terms}
                                     onChange={handleChange}
-                                    className="h-4 w-4 text-black focus:ring-white border-gray-300 rounded"
+                                    className="h-4 w-4 text-[var(--accent)] border-gray-300 rounded"
                                 />
                             </div>
                             <div className="ml-2 text-sm">
-                                <label htmlFor="terms" className="font-medium text-gray-700">
-                                    I agree to the <a href="#" className="text-black hover:text-white">terms of service</a>
+                                <label htmlFor="terms" className="font-medium text-[var(--muted)]">
+                                    I agree to the <a href="#" className="text-[var(--accent)] hover:underline">terms of service</a>
                                 </label>
                             </div>
                         </div>
 
+                        {/* Submit */}
                         <div>
                             <button
                                 type="submit"
-                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:text-black bg-black hover:bg-white focus:ring-2 focus:ring-offset-2 focus:ring-black focus:border-black"
+                                className="w-full flex justify-center py-2 px-4 rounded-md text-sm font-medium text-[var(--accent-text)] bg-[var(--accent)] hover:opacity-90 transition"
                             >
                                 Sign up
                             </button>
@@ -151,42 +121,40 @@ const RegisterationPage = () => {
                     </form>
 
                     {message && (
-                        <p className="mt-4 text-center text-sm text-red-600">{message}</p>
+                        <p className="mt-4 text-center text-sm text-[var(--error)]">{message}</p>
                     )}
 
-                    <div className="mt-6 text-center text-gray-500 relative">
+                    {/* Divider */}
+                    <div className="mt-6 text-center text-[var(--muted)] relative">
                         <div className="absolute inset-0 flex items-center">
                             <div className="w-full border-t border-gray-300"></div>
                         </div>
-                        <div className="relative bg-white px-2 inline-block text-sm">or</div>
+                        <div className="relative bg-[var(--bg)] px-2 inline-block text-sm">or</div>
                     </div>
 
+                    {/* Social Login */}
                     <div className="mt-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a
-                            href="#"
-                            className="w-full flex items-center justify-center px-4 py-2 border border-black rounded-md shadow-sm text-sm font-medium text-black bg-white hover:bg-gray-50 gap-2"
-                        >
-                            <FaGoogle />
-                            Sign in with Google
-                        </a>
-                        <a
-                            href="#"
-                            className="w-full flex items-center justify-center px-4 py-2 border border-black rounded-md shadow-sm text-sm font-medium text-black bg-white hover:bg-gray-50 gap-2"
-                        >
-                            <FaApple />
-                            Sign in with Apple
-                        </a>
+                        {[{icon: FaGoogle, label: "Google"}, {icon: FaApple, label: "Apple"}].map((item, idx) => (
+                            <a
+                                key={idx}
+                                href="#"
+                                className="w-full flex items-center justify-center px-4 py-2 border border-[var(--text)] rounded-md shadow-sm text-sm font-medium gap-2 bg-[var(--bg)] hover:bg-gray-50 transition"
+                            >
+                                <item.icon />
+                                Sign in with {item.label}
+                            </a>
+                        ))}
                     </div>
 
-                    <div className="mt-6 text-center text-sm text-gray-600">
-                        Have an account?
-                        <Link to="/log-in"  className="font-medium text-black hover:text-white">
+                    <div className="mt-6 text-center text-sm text-[var(--muted)]">
+                        Have an account?{" "}
+                        <Link to="/log-in" className="font-medium text-[var(--accent)] hover:underline">
                             Sign in
                         </Link>
                     </div>
                 </div>
 
-                {/* Right side: Image */}
+                {/* Right: Image */}
                 <div className="w-full lg:w-1/2 hidden lg:block overflow-hidden" data-aos="zoom-in">
                     <img
                         src={LoginImage}

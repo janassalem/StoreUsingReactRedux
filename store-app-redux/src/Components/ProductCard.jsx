@@ -7,18 +7,14 @@ const ProductCard = ({ name, image, rating, price, originalPrice, discount }) =>
     const renderStars = (ratingValue) => {
         const stars = [];
         const fullStars = Math.floor(ratingValue);
-        const hasHalfStar = ratingValue % 1 != 0.5; // Check if half-star
+        const hasHalfStar = ratingValue % 1 !== 0.5;
 
         for (let i = 0; i < 5; i++) {
             if (i < fullStars) {
-                // Render a filled star for each full point
                 stars.push(<AiFillStar key={i} className="text-yellow-400" />);
             } else if (i === fullStars && hasHalfStar) {
-                // Render a half-star if the decimal is 0.5 or greater
-
-                stars.push(<FaStarHalfAlt  key={i} className="text-yellow-400"/>);
+                stars.push(<FaStarHalfAlt key={i} className="text-yellow-400"/>);
             } else {
-                // Render an empty star for the rest
                 stars.push(<AiOutlineStar key={i} className="text-gray-300" />);
             }
         }
@@ -37,26 +33,40 @@ const ProductCard = ({ name, image, rating, price, originalPrice, discount }) =>
     const reviewCount = rating?.count || 0;
 
     return (
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="bg-gray-100 p-4">
-                <img src={image} alt={name} className="w-full h-64 object-contain mx-auto" />
+        <div
+            className="rounded-lg shadow-lg overflow-hidden"
+            style={{ backgroundColor: "var(--bg)" }} // Card background
+        >
+            <div className="p-4">
+                <img
+                    src={image}
+                    alt={name}
+                    className="w-full h-64 object-contain mx-auto"
+                />
             </div>
             <div className="p-4 text-center">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 text-center line-clamp-2">{limitTitle(name, 4)}</h3>
+                <h3
+                    className="text-lg font-semibold mb-2 text-center line-clamp-2"
+                    style={{ color: "var(--text)" }} // Title color
+                >
+                    {limitTitle(name, 4)}
+                </h3>
                 <div className="flex items-center justify-center my-2">
-                    <div className="flex text-sm">
-                        {renderStars(productRating)}
-                    </div>
-                    <span className="text-gray-500 text-sm ml-2">
+                    <div className="flex text-sm">{renderStars(productRating)}</div>
+                    <span className="text-sm ml-2" style={{ color: "var(--muted)" }}>
                         {productRating.toFixed(1)} / {reviewCount} reviews
                     </span>
                 </div>
-                <div className="text-xl font-bold text-gray-900 mt-2">
+                <div className="text-xl font-bold mt-2" style={{ color: "var(--text)" }}>
                     ${price}
                     {originalPrice && (
                         <>
-                            <span className="ml-2 text-sm text-gray-500 line-through">${originalPrice}</span>
-                            <span className="ml-2 text-red-500 text-sm font-normal">-{discount}%</span>
+                            <span className="ml-2 text-sm line-through" style={{ color: "var(--muted)" }}>
+                                ${originalPrice}
+                            </span>
+                            <span className="ml-2 text-sm font-normal" style={{ color: "var(--error)" }}>
+                                -{discount}%
+                            </span>
                         </>
                     )}
                 </div>

@@ -15,32 +15,24 @@ import NotUser from "./NotUser.jsx";
 const Profile = () => {
     const dispatch = useDispatch();
     const nav = useNavigate();
-
     const { orders, isLoading, error } = useSelector((state) => state.OrderSlice);
 
     const [user, setUser] = useState(null);
     const [userOrders, setUserOrders] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState(null);
 
-    // init
+    // Init
     useEffect(() => {
         AOS.init({ once: false });
         dispatch(GetAllOrders());
 
         const storedUser = JSON.parse(localStorage.getItem("user"));
         if (storedUser) {
-            // if it's an array, take first element
-            if (Array.isArray(storedUser)) {
-                setUser(storedUser[0]);
-            } else {
-                // if it's an object (normal case)
-                setUser(storedUser);
-            }
+            setUser(Array.isArray(storedUser) ? storedUser[0] : storedUser);
         }
     }, [dispatch]);
 
-
-    // filter orders when user/ orders are ready
+    // Filter orders for normal users
     useEffect(() => {
         if (user && user.email !== "admin") {
             setUserOrders(orders.filter((order) => order.userID === user.id));
@@ -56,7 +48,10 @@ const Profile = () => {
 
     if (error) {
         return (
-            <div className="flex justify-center items-center py-20 text-xl text-red-600">
+            <div
+                className="flex justify-center items-center py-20 text-xl"
+                style={{ color: "var(--error)" }}
+            >
                 Error: {error}
             </div>
         );
@@ -70,9 +65,7 @@ const Profile = () => {
         );
     }
 
-    if (!user) {
-        return <NotUser />;
-    }
+    if (!user) return <NotUser />;
 
     return (
         <div className="flex max-w-6xl mx-auto py-10 gap-8">
@@ -92,9 +85,11 @@ const Profile = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" data-aos="fade-right">
-
                     {/* User Info */}
-                    <div className="bg-white shadow-md rounded-xl p-6">
+                    <div
+                        className="shadow-md rounded-xl p-6"
+                        style={{ backgroundColor: "var(--bg)", color: "var(--text)" }}
+                    >
                         <h2 className="text-2xl font-bold mb-4">
                             {user.email === "admin" ? "Admin Profile" : "My Profile"}
                         </h2>
@@ -106,12 +101,6 @@ const Profile = () => {
                                 <p>
                                     <span className="font-semibold">Name:</span> {user.name}
                                 </p>
-                                {/*<p>*/}
-                                {/*    <span className="font-semibold">Phone:</span> {user.phone}*/}
-                                {/*</p>*/}
-                                {/*<p>*/}
-                                {/*    <span className="font-semibold">Address:</span> {user.address}*/}
-                                {/*</p>*/}
                             </>
                         )}
 
@@ -119,37 +108,49 @@ const Profile = () => {
                             onClick={handleLogout}
                             disabled={isLoading}
                             className="mt-4 flex items-center justify-center gap-2 px-4 py-2
-                            text-white bg-red-500 hover:bg-red-600
-                            rounded-lg shadow-sm transition-all duration-200
-                            disabled:opacity-50 disabled:cursor-not-allowed"
+                                rounded-lg shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            style={{
+                                backgroundColor: "var(--error)",
+                                color: "var(--accent-text)",
+                            }}
                         >
                             <IoLogOut size={20} />
                             <span className="font-medium">Logout</span>
                         </button>
 
-                        {/* Admin shortcut */}
                         {user.email === "admin" && (
                             <button
                                 onClick={() => nav("/dashboard")}
-                                className="mt-4 w-full px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-lg shadow-sm transition-all"
+                                className="mt-4 w-full px-4 py-2 rounded-lg shadow-sm transition-all"
+                                style={{
+                                    backgroundColor: "var(--accent)",
+                                    color: "var(--accent-text)",
+                                }}
                             >
                                 Go to Dashboard
                             </button>
                         )}
                     </div>
 
-                    {/* Orders (only for normal users) */}
+                    {/* Orders */}
                     {user.email !== "admin" && (
-                        <div className="bg-white shadow-md rounded-xl p-6 w-full">
+                        <div
+                            className="shadow-md rounded-xl p-6 w-full"
+                            style={{ backgroundColor: "var(--bg)", color: "var(--text)" }}
+                        >
                             <h2 className="text-2xl font-bold mb-4">My Orders</h2>
                             {userOrders.length === 0 ? (
-                                <p className="text-gray-500">No past orders available.</p>
+                                <p style={{ color: "var(--muted)" }}>No past orders available.</p>
                             ) : (
                                 <ul className="space-y-4 h-[200px] overflow-auto" data-aos="fade-up">
                                     {userOrders.map((order) => (
                                         <li
                                             key={order.id}
-                                            className="rounded-lg p-4 flex flex-col gap-2 bg-gray-50 cursor-pointer hover:bg-gray-100"
+                                            className="rounded-lg p-4 flex flex-col gap-2 cursor-pointer"
+                                            style={{
+                                                backgroundColor: "var(--bg)",
+                                                border: "1px solid var(--muted)",
+                                            }}
                                             onClick={() => setSelectedOrder(order)}
                                         >
                                             <p>
@@ -173,10 +174,7 @@ const Profile = () => {
 
                     {/* PopUp */}
                     {selectedOrder && (
-                        <PopUp
-                            order={selectedOrder}
-                            onClose={() => setSelectedOrder(null)}
-                        />
+                        <PopUp order={selectedOrder} onClose={() => setSelectedOrder(null)} />
                     )}
                 </div>
             </div>

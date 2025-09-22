@@ -347,6 +347,32 @@
       ],
       "total": 27.88,
       "status": "Pending"
+    },
+    {
+      "id": "7a31",
+      "userID": "2e35",
+      "name": "Zia Randolph",
+      "email": "jazamas@mailinator.com",
+      "date": "September 22, 2025",
+      "address": {
+        "street": "Et qui facere vero e",
+        "city": "Exercitation optio ",
+        "zip": "69919"
+      },
+      "payment": {
+        "card": "A dignissimos autem ",
+        "expiration": "Et aut elit qui non",
+        "cvc": "Nihil nulla tempor m"
+      },
+      "items": [
+        {
+          "id": "20",
+          "quantity": 1,
+          "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_t.png"
+        }
+      ],
+      "total": 30.392,
+      "status": "Pending"
     }
   ],
   "users": [

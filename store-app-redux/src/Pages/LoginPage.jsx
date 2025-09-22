@@ -42,18 +42,18 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="bg-white flex items-center justify-center w-full mt-20">
-            <div className="bg-white rounded-3xl overflow-hidden flex flex-col lg:flex-row max-w-6xl w-full">
+        <div className="flex items-center justify-center w-full mt-20" style={{ backgroundColor: "var(--bg)", color: "var(--text)" }}>
+            <div className="rounded-3xl overflow-hidden flex flex-col lg:flex-row max-w-6xl w-full" style={{ backgroundColor: "var(--bg)" }}>
                 {/* Left side: Form */}
                 <div className="w-full lg:w-1/2 p-8 md:p-16 flex flex-col justify-center" data-aos="flip-left">
-                    <h1 className="text-3xl font-bold mb-2 text-neutral-800">Welcome back!</h1>
-                    <h5 className="text-md font-bold mb-8 text-neutral-600">
+                    <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--text)" }}>Welcome back!</h1>
+                    <h5 className="text-md font-bold mb-8" style={{ color: "var(--muted)" }}>
                         Enter your credentials to access your account
                     </h5>
 
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                            <label htmlFor="email" className="block text-sm font-medium" style={{ color: "var(--muted)" }}>
                                 Email address
                             </label>
                             <input
@@ -64,12 +64,17 @@ const LoginPage = () => {
                                 required
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
+                                className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none sm:text-sm"
+                                style={{
+                                    borderColor: "var(--muted)",
+                                    backgroundColor: "var(--bg)",
+                                    color: "var(--text)"
+                                }}
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                            <label htmlFor="password" className="block text-sm font-medium" style={{ color: "var(--muted)" }}>
                                 Password
                             </label>
                             <input
@@ -80,23 +85,33 @@ const LoginPage = () => {
                                 required
                                 value={formData.password}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black sm:text-sm"
+                                className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none sm:text-sm"
+                                style={{
+                                    borderColor: "var(--muted)",
+                                    backgroundColor: "var(--bg)",
+                                    color: "var(--text)"
+                                }}
                             />
                         </div>
 
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:text-black bg-black hover:bg-white focus:ring-2 focus:ring-offset-2 focus:ring-black focus:border-black"
+                            className="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:ring-2 focus:ring-offset-2"
+                            style={{
+                                backgroundColor: "var(--accent)",
+                                color: "var(--accent-text)",
+                                borderColor: "var(--accent)"
+                            }}
                         >
                             {isLoading ? "Loading..." : "Sign in"}
                         </button>
 
-                        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+                        {error && <p className="text-sm mt-2" style={{ color: "var(--error)" }}>{error}</p>}
 
-                        <div className="mt-6 text-center text-sm text-gray-600">
+                        <div className="mt-6 text-center text-sm" style={{ color: "var(--muted)" }}>
                             Don't have an account?{" "}
-                            <Link to="/register" className="font-medium text-black hover:text-white">
+                            <Link to="/register" className="font-medium" style={{ color: "var(--accent)" }}>
                                 Sign up
                             </Link>
                         </div>

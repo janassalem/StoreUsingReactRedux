@@ -7,6 +7,7 @@ import { MdOutlineCancel, MdLogout } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
 import { FaShopify } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import ModeSwitch from "../ModeSwitch.jsx";
 
 const AdminNavBar = () => {
     const [isSideBarOpen, setSideBarOpen] = React.useState(false);
@@ -30,7 +31,7 @@ const AdminNavBar = () => {
     };
 
     return (
-        <div className="bg-white text-gray-800 flex min-h-screen">
+        <div style={{ backgroundColor: "var(--bg)", color: "var(--text)" }} className="flex min-h-screen">
             {/* Sidebar */}
             <AnimatePresence>
                 {isSideBarOpen && (
@@ -39,7 +40,8 @@ const AdminNavBar = () => {
                         animate={{ x: 0 }}
                         exit={{ x: -300 }}
                         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                        className="fixed top-0 left-0 h-screen z-40 w-64 bg-white shadow-lg"
+                        style={{ backgroundColor: "var(--bg)", color: "var(--text)" }}
+                        className="fixed top-0 left-0 h-screen z-40 w-64 shadow-lg"
                     >
                         <div className="p-6 flex flex-col h-full">
                             {/* Header */}
@@ -48,6 +50,7 @@ const AdminNavBar = () => {
                                     initial={{ opacity: 0, y: -20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2 }}
+                                    style={{ color: "var(--text)" }}
                                     className="text-2xl font-bold"
                                 >
                                     Admin Panel
@@ -56,6 +59,7 @@ const AdminNavBar = () => {
                                     whileHover={{ rotate: 90, scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
                                     onClick={toggleSidebar}
+                                    style={{ color: "var(--text)" }}
                                 >
                                     <MdOutlineCancel className="h-6 w-6" />
                                 </motion.button>
@@ -76,24 +80,37 @@ const AdminNavBar = () => {
                                                 `flex items-center space-x-3 p-3 rounded-lg transition-colors ${
                                                     isActive
                                                         ? "bg-gray-200 font-semibold"
-                                                        : "hover:bg-gray-200"
+                                                        : "hover:bg-gray-100"
                                                 }`
                                             }
                                             onClick={() => setSideBarOpen(false)}
+                                            style={{ color: "var(--text)" }}
                                         >
                                             <item.icon className="h-6 w-6" />
                                             <span className="text-lg">{item.name}</span>
                                         </NavLink>
                                     </motion.div>
+
                                 ))}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <ModeSwitch />
+                                </motion.div>
+
                             </nav>
 
                             {/* Logout */}
                             <motion.button
-                                whileHover={{ scale: 1.05, backgroundColor: "#dc2626" }}
+                                whileHover={{ scale: 1.05, backgroundColor: "var(--error)" }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleLogout}
-                                className="flex items-center space-x-3 p-3 rounded-lg bg-red-500 text-white mt-auto"
+                                style={{ backgroundColor: "var(--error)", color: "var(--accent-text)" }}
+                                className="flex items-center space-x-3 p-3 rounded-lg mt-auto"
                             >
                                 <MdLogout className="h-6 w-6" />
                                 <span className="text-lg">Logout</span>
@@ -114,6 +131,7 @@ const AdminNavBar = () => {
                         onClick={toggleSidebar}
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.9 }}
+                        style={{ color: "var(--text)" }}
                         className="mb-4"
                     >
                         <IoMdMenu className="h-8 w-8" />
@@ -123,7 +141,7 @@ const AdminNavBar = () => {
                 {/* Render child routes */}
                 <div className="h-full">
                     <div className="min-h-[70vh]">
-                        <React.Suspense fallback={<p>Loading...</p>}>
+                        <React.Suspense fallback={<p style={{ color: "var(--text)" }}>Loading...</p>}>
                             {/* Child route content */}
                         </React.Suspense>
                     </div>

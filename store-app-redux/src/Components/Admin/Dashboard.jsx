@@ -32,7 +32,6 @@ const Dashboard = () => {
         dispatch(GetAllProducts());
     }, [dispatch]);
 
-    // Derive sales data from orders (group by month)
     const salesData = orders.reduce((acc, order) => {
         const date = new Date(order.createdAt || Date.now());
         const month = date.toLocaleString("default", { month: "short" });
@@ -45,7 +44,6 @@ const Dashboard = () => {
         return acc;
     }, []);
 
-    // Example active users
     const activeUsers = [
         { name: "Mon", users: Math.floor(Math.random() * 300) },
         { name: "Tue", users: Math.floor(Math.random() * 300) },
@@ -83,60 +81,55 @@ const Dashboard = () => {
         },
     ];
 
-
     if (ordersLoading || productsLoading) return <Loader />;
-    if (ordersError) return <p className="text-red-500">Error: {ordersError}</p>;
+    if (ordersError) return <p style={{ color: "var(--error)" }}>Error: {ordersError}</p>;
 
     return (
-        <div className="min-h-screen bg-white text-black p-8">
+        <div style={{ backgroundColor: "var(--bg)", color: "var(--text)" }} className="min-h-screen p-8">
             <h1 className="text-3xl font-extrabold mb-8">Dashboard Overview</h1>
 
-            {/* Top Stats with hover animation */}
+            {/* Top Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                 {stats.map((item, i) => (
                     <div
                         key={i}
-                        className="bg-white rounded-2xl p-6 shadow-md border border-gray-100
-                       flex items-center justify-between
-                       transform transition-all duration-300
-                       hover:scale-105 hover:shadow-xl hover:border-blue-500"
+                        style={{ backgroundColor: "var(--bg)", borderColor: "var(--muted)" }}
+                        className="rounded-2xl p-6 shadow-md border flex items-center justify-between transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                     >
                         <div>
-                            <p className="text-gray-500 text-sm">{item.title}</p>
-                            <h2 className="text-2xl font-bold">{item.value}</h2>
+                            <p style={{ color: "var(--muted)" }} className="text-sm">{item.title}</p>
+                            <h2 style={{ color: "var(--text)" }} className="text-2xl font-bold">{item.value}</h2>
                             <p
-                                className={`text-sm ${
-                                    item.change.startsWith("+")
-                                        ? "text-green-500"
-                                        : "text-red-500"
-                                }`}
+                                style={{ color: item.change.startsWith("+") ? "var(--success)" : "var(--error)" }}
+                                className="text-sm"
                             >
                                 {item.change}
                             </p>
                         </div>
-                        <div className="text-3xl text-gray-700">{item.icon}</div>
+                        <div style={{ color: "var(--muted)" }} className="text-3xl">{item.icon}</div>
                     </div>
                 ))}
             </div>
 
-            {/* Sales + Active Users with animations */}
+            {/* Sales + Active Users */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <motion.div
-                    className="bg-white p-6 rounded-2xl shadow-md border border-gray-100"
+                    style={{ backgroundColor: "var(--bg)", borderColor: "var(--muted)" }}
+                    className="p-6 rounded-2xl shadow-md border"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                 >
-                    <h3 className="text-lg font-bold mb-4">Sales Overview</h3>
+                    <h3 style={{ color: "var(--text)" }} className="text-lg font-bold mb-4">Sales Overview</h3>
                     <ResponsiveContainer width="100%" height={250}>
                         <LineChart data={salesData}>
-                            <XAxis dataKey="month" stroke="#000" />
-                            <YAxis stroke="#000" />
+                            <XAxis dataKey="month" stroke="var(--text)" />
+                            <YAxis stroke="var(--text)" />
                             <Tooltip />
                             <Line
                                 type="monotone"
                                 dataKey="sales"
-                                stroke="#1d4ed8"
+                                stroke="var(--accent)"
                                 strokeWidth={3}
                             />
                         </LineChart>
@@ -144,18 +137,19 @@ const Dashboard = () => {
                 </motion.div>
 
                 <motion.div
-                    className="bg-white p-6 rounded-2xl shadow-md border border-gray-100"
+                    style={{ backgroundColor: "var(--bg)", borderColor: "var(--muted)" }}
+                    className="p-6 rounded-2xl shadow-md border"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                 >
-                    <h3 className="text-lg font-bold mb-4">Active Users</h3>
+                    <h3 style={{ color: "var(--text)" }} className="text-lg font-bold mb-4">Active Users</h3>
                     <ResponsiveContainer width="100%" height={250}>
                         <BarChart data={activeUsers}>
-                            <XAxis dataKey="name" stroke="#000" />
-                            <YAxis stroke="#000" />
+                            <XAxis dataKey="name" stroke="var(--text)" />
+                            <YAxis stroke="var(--text)" />
                             <Tooltip />
-                            <Bar dataKey="users" fill="#1d4ed8" radius={[10, 10, 0, 0]} />
+                            <Bar dataKey="users" fill="var(--accent)" radius={[10, 10, 0, 0]} />
                         </BarChart>
                     </ResponsiveContainer>
                 </motion.div>

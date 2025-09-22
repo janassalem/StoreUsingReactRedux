@@ -16,16 +16,27 @@ const SearchBar = () => {
     };
 
     return (
-        <div className="flex items-center w-100 h-10  max-w-lg mx-auto bg-gray-100 rounded-full shadow-md overflow-hidden p-2">
-            <button className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 focus:outline-none">
-                <IoSearchSharp />
+        <div
+            className="flex items-center w-100 h-10 max-w-lg mx-auto rounded-full shadow-md overflow-hidden p-2"
+            style={{ backgroundColor: "var(--bg)" }}
+        >
+            <button
+                className="transition-colors duration-200 focus:outline-none"
+                style={{ color: "var(--muted)" }}
+            >
+                <IoSearchSharp className="hover:text-var(--accent)" />
             </button>
             <input
                 type="text"
                 placeholder="Search for products..."
                 value={query}
                 onChange={handleChange}
-                className="w-full bg-transparent border-none focus:outline-none px-4 py-2 text-gray-700 placeholder-gray-400"
+                className="w-full bg-transparent border-none focus:outline-none px-4 py-2"
+                style={{
+                    color: "var(--text)",
+                    caretColor: "var(--accent)",
+                    "::placeholder": { color: "var(--muted)" }
+                }}
             />
         </div>
     );

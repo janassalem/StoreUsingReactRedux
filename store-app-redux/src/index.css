@@ -1,4 +1,32 @@
 @import "tailwindcss";
+:root {
+    --bg: #ffffff;
+    --text: #0f172a;
+    --muted: #6b7280; /* gray-500 */
+    --accent: #0f172a; /* used for buttons (dark in light mode) */
+    --accent-text: #ffffff; /* text on accent buttons */
+    --success: #16a34a; /* green-600 */
+    --error: #dc2626; /* red-600 */
+}
+
+[data-theme="dark"] {
+    --bg: #0b1220;
+    --text: #f8fafc;
+    --muted: #9ca3af;
+    --accent: #f8fafc;
+    --accent-text: #0b1220;
+    --success: #22c55e;
+    --error: #ef4444;
+    --edit : #F59F27
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
 *{
     scroll-behavior: smooth;
 }

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react';
 import ProductCard from '../Components/ProductCard.jsx';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,27 +8,28 @@ import 'aos/dist/aos.css';
 
 const TopSelling = () => {
     const dispatch = useDispatch();
-    // Correcting the state selector. The slice name is 'products' not 'ProductState'
     const { products, isLoading, error } = useSelector((state) => state.ProductState);
 
     useEffect(() => {
         dispatch(GetAllProducts());
         AOS.init({
-            once: false,
+            once: true,          // animate once per element
+            duration: 800,       // smooth duration
+            easing: "ease-in-out"
         });
     }, [dispatch]);
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center py-20 text-xl text-gray-700">
-                Loading new arrivals...
+            <div className="flex justify-center items-center py-20 text-xl text-[var(--text-color)]">
+                Loading top selling products...
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className="flex justify-center items-center py-20 text-xl text-red-600">
+            <div className="flex justify-center items-center py-20 text-xl text-red-500">
                 Error: {error}
             </div>
         );
@@ -36,55 +37,57 @@ const TopSelling = () => {
 
     if (products.length === 0) {
         return (
-            <div className="flex justify-center items-center py-20 text-xl text-gray-500">
-                No new arrivals available.
+            <div className="flex justify-center items-center py-20 text-xl text-[var(--text-muted,#6b7280)]">
+                No top selling products available.
             </div>
         );
     }
 
-
-
-
-
-    // Slice the products array to get only the first 4 items for "New Arrivals"
+    // Slice products array to show items 5–8
     const featuredProducts = products.slice(5, 9);
 
     return (
-        <div className="bg-white py-1 px-10 mt-8">
-            <div className="container mx-auto px-4" data-aos="fade-up"
-                 data-aos-anchor-placement="bottom-bottom">
-                <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8"  data-aos="fade-up"
-                    data-aos-anchor-placement="bottom-bottom">
+        <div className="bg-[var(--bg-color)] py-1 px-10 mt-8">
+            <div className="container mx-auto px-4" data-aos="fade-up">
+                <h2
+                    className="text-4xl font-extrabold text-center text-[var(--text-color)] mb-8"
+                    data-aos="fade-up"
+                >
                     TOP SELLING
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"  data-aos="fade-up"
-                     data-aos-anchor-placement="bottom-bottom">
-                    {/* Map over the sliced array to display only 4 products */}
-                    {featuredProducts.map(product => (
+
+                <div
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                >
+                    {featuredProducts.map((product) => (
                         <Link to={`/ProductDetailPage/${product.id}`} key={product.id}>
                             <ProductCard
-                                key={product.id}
                                 name={product.title}
                                 image={product.image}
                                 price={product.price}
                                 rating={product.rating}
-                                // The API response doesn't contain these props
-                                // reviews={product.reviews}
-                                // originalPrice={product.originalPrice}
-                                // discount={product.discount}
                             />
                         </Link>
                     ))}
                 </div>
-                <div className="flex justify-center mt-12"  data-aos="fade-up"
-                     data-aos-anchor-placement="bottom-bottom">
-                    {/* Changed the button to a Link for navigation */}
-                    <Link to="/all-products" className="px-8 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition duration-300">
+
+                <div
+                    className="flex justify-center mt-12"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
+                    <Link
+                        to="/all-products"
+                        className="px-8 py-3 border border-gray-300 dark:border-gray-700 rounded-full text-[var(--text-color)] hover:bg-[var(--hover-bg,#f3f4f6)] transition duration-300"
+                    >
                         View All
                     </Link>
                 </div>
             </div>
-            <hr className="my-10 border-gray-300" />
+
+            <hr className="my-10 border-gray-300 dark:border-gray-700" />
         </div>
     );
 };
